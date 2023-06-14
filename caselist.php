@@ -71,7 +71,7 @@ $('#caseLists').DataTable({});
                                   </thead> 
                               <tbody class="table-warning">
                               <?php
-                                require './db_connection.php';
+                                require './db/config.php';
                                 $client_list = "SELECT lawyer.user_fullname,cases.id,cases.lawyer_user_id,cases.case_number,cases.case_type,cases.case_sub_type,cases.client_type,client.firstname,client.middlename,client.lastname
                                 FROM tbl_case_list as cases 
                                 INNER JOIN tbl_client_list as client ON client.id = cases.client_user_id

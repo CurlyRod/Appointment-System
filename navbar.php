@@ -16,71 +16,47 @@
       $stmt->close()?> 
 
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #212529;">
-    <a class="navbar-brand" href="#"><img src="./vendor/img/logo-transparent.png" alt="Logo" width="100%" height="45"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link font-color" href="home" data-page="home" style="color:#ADA06D;">DASHBOARD</a>
-        </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">  <img src="./vendor/img/logo-transparent.png" alt="Logo" width="100%" height="45" class="d-inline-block align-text-top"></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-page="home" style="color:#ADA06D;">DASHBOARD</a>
+          </li>
+          <li class="nav-item dropdown" id="client_btn">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" style="color:#ADA06D;" >
+            CLIENTS
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" data-page="individual_clientlist">INDIVIDUAL CLIENT LIST</a></li>
+              <li><a class="dropdown-item" data-page="legal_clientlist">LEGAL ENTITY</a></li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color:#ADA06D;">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false" style="color:#ADA06D;">
-                CLIENTS
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAccount" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Account Settings
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Individual Client List</a>
-            <a class="dropdown-item" href="#">Legal Entity List</a>
-          </div>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false" style="color:#ADA06D;">
-                CASES
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Category 1</a>
-            <a class="dropdown-item" href="#">Category 2</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">All Products</a>
-          </div>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownAccount">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Privacy</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" onclick="confirmLogout()">Log-out</a>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color:#ADA06D;">USER</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false" style="color:#ADA06D;">
-            TASK
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Category 1</a>
-            <a class="dropdown-item" href="#">Category 2</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">All Products</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" style="color:#ADA06D;">REPORTS</a>
-        </li>
-      </ul>
-    </div>
-    <div class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAccount" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <img src="./vendor/img/users.jpg" id="profilePicture" name="profilePicture"> 
-        <span style="font-size:12px;color:#ADA06D;"><?php echo  $user_fullname ?></span> | <span style="font-size:12px;color:black; color:#ADA06D;"><?php echo $user_role;?></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAccount">
-          <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Privacy</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" onclick="confirmLogout()">Log-out</a>
-        </div>
-      </li>
+      </div>
     </div>
   </nav>

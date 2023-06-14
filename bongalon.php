@@ -4,23 +4,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-  <link rel="stylesheet" href="./vendor/bootstrap/bootstrap_4.0.0_css_bootstrap.min.css">
+  <link rel="stylesheet" href="./vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="./vendor/datatable/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="./vendor/alertify/alertify.min.css">
   <link rel="stylesheet" href="./src/css/style.css">  
   <title>BONGALON LAW FIRM</title>
 </head>
 
 <body>  
- 
+
+<style>
+    .name {
+    color: #0D0D0D;
+    font-size: 16px;
+    font-weight:500;
+    }
+</style>
   <?php include 'navbar.php';  ?>
-  <div class="row m-5 bg-warning "id="loadContent"style="height:100%;">  
+
+   
+ 
+    <div class="row p-5  "id="loadContent">
+
+    </div>
+
   
-  </div>
  
   <script src="./vendor/js/jquery-3.6.1.js" type="text/javascript"> </script>   
-  <script src="./vendor/js/bootstrap_4.0.0_js_bootstrap.min.js"></script>
-  <script src="./vendor/sweetalert/sweetalert2@11.js" type="text/javascript"> </script>   
-  <script src="./src/js/routing.js"></script> 
+  <script src="./vendor/js/jquery.dataTables.min.js"></script>
+  <script src="./vendor/js/bootstrap.bundle.min.js"  type="text/javascript"></script>
+  <script src="./vendor/sweetalert/sweetalert2@11.js" type="text/javascript"> </script>  
+  <script src="./vendor/alertify/alertify.min.js" type="text/javascript"></script>  
+  <script src="./src/js/routing.js"></script>  
+ 
  
 <script>
   $(document).ready(function() {
@@ -46,19 +62,19 @@
         loadContent(page);
     });
 
-//     function loadContent(page) {
-//         $.ajax({
-//             url: page + '.php',
-//             type: 'GET',
-//             success: function(response) {
-//                 $('#loadContent').html(response);
+    function loadContent(page) {
+        $.ajax({
+            url: page + '.php',
+            type: 'GET',
+            success: function(response) {
+                $('#loadContent').html(response);
                
-//             },
-//             error: function(xhr, status, error) {
-//                 console.log(xhr.responseText);
-//             }
-//         });
-//     }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
  });
 
  

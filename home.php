@@ -1,6 +1,6 @@
-<div class="row">
-    <div class="col" style="width:40%;"> 
-        <div class="card">
+<div class="row ">
+    <div class="col-6">
+    <div class="card">
             <div class="card-header fw-bold"style="border-bottom:5px solid #ADA06D;">TIMELINE</div>
             <div class="card-body">
             <div class="table-responsive " style="height:400px;">
@@ -40,12 +40,13 @@
 					</div>
             </div>
         </div>
-    </div>
+    </div> 
+    
     <div class="col">
-        <div class="card">
+    <div class="card">
             <div class="card-header fw-bold"style="border-bottom:5px solid #ADA06D;">CALENDAR</div>
             <div class="card-body">
-                sample
+               CALENDAR
             </div>
         </div>
     </div>
