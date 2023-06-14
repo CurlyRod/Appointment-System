@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link font-color" href="#" style="color:#ADA06D;">DASHBOARD</a>
+          <a class="nav-link font-color" href="home" data-page="home" style="color:#ADA06D;">DASHBOARD</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
