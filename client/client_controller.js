@@ -339,4 +339,89 @@ $(document).on('click','#save_legal_btn',function(e){
 }); 
 
 
+//UPDATING LEGAL ENITITY HERE
+$(document).on('click','#legal_edit_user',function(e){ 
+    e.preventDefault();
+var legal_user_ids = $(this).val();
+//alert(legal_user_id);
+  $.ajax({
+        type:"GET",url:"./php/client_ajax.php?legal_client_id="+legal_user_ids,
+        success: function(response)
+        {
+           var result = jQuery.parseJSON(response); 
+            if(result.status == 404)
+            {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1);
+                alertify.success(result.message);
+            }
+            
+            else if(result.status == 200)
+            {
+                $("#legal_client_id_edit").val(result.data.id);  
+
+                $("#legal_firstname_edit").val(result.data.firstname);    
+                $("#legal_middlename_edit").val(result.data.middlename);    
+                $("#legal_lastname_edit").val(result.data.lastname);               
+                $("#legal_contact_one_edit").val(result.data.first_contact);               
+                $("#legal_contact_two_edit").val(result.data.second_contact);    
+                $("#legal_email_one_edit") .val(result.data.first_email);       
+                $("#legal_email_two_edit") .val(result.data.second_email);       
+                $("#company_name_edit").val(result.data.company_name);
+                $("#company_address_edit").val(result.data.company_address);
+
+                $("#editentityUserModal").modal("show"); 
+
+            }
+        } 
+  });
+      
+}); 
+
+
+//UPDATE CLIENT INFORMATION
+$(document).on('submit',"#update_entity_Forms",function(e){
+    e.preventDefault();
+   
+    var formData = new FormData(this);
+    formData.append("legal_update_client",true);
+    $.ajax({ 
+      type:"POST",url:"./php/client_ajax.php",data:formData,
+      processData:false,contentType:false,
+    
+      success:function(response)
+      {
+          var result = jQuery.parseJSON(response); 
+          if(result.status == 500)
+          {
+            alertify.set('notifier','positions','top-right'); 
+            alertify.success(result.message); 
+          }
+          else if(result.status == 200)
+          {
+         
+            alertify.set('notifier','positions','top-right'); 
+            alertify.success(result.message); 
+          
+            $('#editentityUserModal').modal('hide');
+           $('#update_entity_Forms')[0].reset();
+            //  $('#userList').load(location.href+ " #userList");;
+            loadContent('legal_clientlist'); 
+            } 
+       
+         // abortController.abort();
+       $(document).off('submit', '#update_entity_Forms');
+      } 
+  
+  
+    });
+  //  xhr.abort(); 
+  }); 
+
+  
+  
+
+
+
+
 // END LEGAL ENTITY HERE // 

@@ -13,7 +13,81 @@ $('#entityList').DataTable({});
 }); 
 
 </script> 
-<!-- MODAL START HERE -->
+<!-- MODAL START HERE --> 
+<!-- EDIT ENTITY HERE -->
+<!-- EDIT LEGAL ENTITY --> 
+<div class="modal fade" id="editentityUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title ">Edit Legal Entity </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            
+      <form action="" id="update_entity_Forms">
+            <div class="row">
+            <div class="col">
+            <input type="text" id="legal_client_id_edit"name="legal_client_id_edit">
+                <label for="company_name" class="form-label">Company Name</label>    
+                <input type="text" id="company_name_edit" name="company_name_edit" class="form-control">
+            </div>
+            <div class="col">
+            <label for="company_address" class="form-label">Company address</label>    
+                <input type="text" id="company_address_edit" name="company_address_edit" class="form-control">
+            </div>
+            </div> 
+            <div class="row">
+                <h6 class="mt-3">REPRENSENTATTIVE</h6>
+                <div class="col">
+                <label for="legal_firstname" class="form-label">Firstname:</label>    
+                <input type="text" id="legal_firstname_edit" name="legal_firstname_edit"  class="form-control">
+                </div>
+                <div class="col">
+                <label for="legal_middlename" class="form-label">Middle Name:</label>    
+                <input type="text" id="legal_middlename_edit"  name="legal_middlename_edit"class="form-control">
+                </div>
+                <div class="col">
+                <label for="legal_lastname" class="form-label">LastName:</label>    
+                <input type="text" id="legal_lastname_edit" name="legal_lastname_edit" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                <label for="legal_email_one" class="form-label">Email address</label>    
+                <input type="email" id="legal_email_one_edit" name="legal_email_one_edit" class="form-control">
+               </div>
+               <div class="col">
+                <label for="legal_email_two" class="form-label">Email address</label>    
+                <input type="email" id="legal_email_two_edit" name="legal_email_two_edit" class="form-control">
+               </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <label for="legal_contact_one" class="form-label">Contact</label>    
+                <input type="text" id="legal_contact_one_edit" name="legal_contact_one_edit"  class="form-control">
+                </div>
+                <div class="col">
+                <label for="legal_email_two" class="form-label">Contact</label>    
+                <input type="text" id="legal_contact_two_edit"  name="legal_contact_two_edit" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" id="edit_legal_btn"class="btn btn-warning">Save changes</button>
+      </div>
+            </div>
+       
+           
+      </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- END ENTITY HERE -->
 <!-- ADD LEGAL ENTITY -->
 <div class="modal fade" id="addEntityUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -28,7 +102,7 @@ $('#entityList').DataTable({});
         <div class="row">
             <div class="col">
                 <label for="company_name" class="form-label">Company Name</label>    
-                <input type="text" id="company_name" name="company_name" class="form-control">
+                <input type="hidden" id="company_name" name="company_name" class="form-control">
             </div>
             <div class="col">
             <label for="company_address" class="form-label">Company address</label>    

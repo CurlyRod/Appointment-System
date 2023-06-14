@@ -143,7 +143,7 @@ $('#clientList').DataTable({});
                           
                  <div id ="errorMessage"class="alert alert-warning d-none"></div> 
                   <div class="col"> 
-                  <input type="text" name="client_id_input" id="client_id_input">  
+                  <input type="hidden" name="client_id_input" id="client_id_input">  
 
                    <label class="form-label">Lastname:</label>
                  <input type="text" class="form-control" id="editlastName" name="editlastName"  placeholder="LastName">

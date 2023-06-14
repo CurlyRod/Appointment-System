@@ -39,6 +39,17 @@
              
             </ul>
           </li>
+          <li class="nav-item dropdown" id="client_btn">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" style="color:#ADA06D;" >
+              CASES
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" data-page="caselist">CASE LIST</a></li>
+              <li><a class="dropdown-item" data-page="legal_clientlist">TEAM MEMBER</a></li>
+              <li><a class="dropdown-item" data-page="legal_clientlist">CASES</a></li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="#" style="color:#ADA06D;">Contact</a>
           </li>
@@ -54,7 +65,7 @@
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><a class="dropdown-item" href="#">Privacy</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" onclick="confirmLogout()">Log-out</a>
+                <li><a class="dropdown-item" href="#" onclick="confirmLogout()">Log-out</a>
           </ul>
         </li>
       </div>
