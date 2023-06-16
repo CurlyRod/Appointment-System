@@ -13,15 +13,16 @@
 
 <body>  
 
-<style>
-    .name {
+
+  <?php include 'navbar.php';  ?>
+  
+  <style>
+    .name{
     color: #0D0D0D;
     font-size: 16px;
     font-weight:500;
     }
 </style>
-  <?php include 'navbar.php';  ?>
-
    
  
     <div class="row p-5  "id="loadContent">
@@ -54,9 +55,9 @@
     $('nav a[data-page="' + defaultPage + '"]').addClass('selected');
     loadContent(defaultPage);
 
-    $('nav a').click(function(e) {
+    $('nav li a').click(function(e) {
         e.preventDefault();
-        $('nav a').removeClass('selected');
+        $('nav li a').removeClass('selected');
         $(this).addClass('selected');
         var page = $(this).data('page');
         loadContent(page);

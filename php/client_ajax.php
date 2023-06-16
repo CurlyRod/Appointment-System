@@ -472,5 +472,7 @@ if(isset($_GET['view_legal_entity']))  {
         
         
         }
+
+
 // ---- END LEGAL ENTITY HERE ----///
 ?>

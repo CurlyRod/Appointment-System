@@ -28,7 +28,7 @@ $('#entityList').DataTable({});
       <form action="" id="update_entity_Forms">
             <div class="row">
             <div class="col">
-            <input type="text" id="legal_client_id_edit"name="legal_client_id_edit">
+            <input type="hidden" id="legal_client_id_edit"name="legal_client_id_edit">
                 <label for="company_name" class="form-label">Company Name</label>    
                 <input type="text" id="company_name_edit" name="company_name_edit" class="form-control">
             </div>
@@ -98,11 +98,11 @@ $('#entityList').DataTable({});
       </div>
       <div class="modal-body">
             
-      <form action="" id="save_entity_Form">
+      <form action="" id="save_client_Form">
         <div class="row">
             <div class="col">
                 <label for="company_name" class="form-label">Company Name</label>    
-                <input type="hidden" id="company_name" name="company_name" class="form-control">
+                <input type="text" id="company_name" name="company_name" class="form-control">
             </div>
             <div class="col">
             <label for="company_address" class="form-label">Company address</label>    
@@ -147,7 +147,7 @@ $('#entityList').DataTable({});
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" id="save_legal_btn"class="btn btn-warning">Save changes</button>
+        <button type="button" id="save_legal_client"class="btn btn-warning">Save changes</button>
       </div>
       </form>
 
@@ -273,4 +273,4 @@ $('#entityList').DataTable({});
         </div>
     </div>
 </div> 
-<script src="./client/client_controller.js"></script>
+<script src="./client/client_legal_controller.js"></script>

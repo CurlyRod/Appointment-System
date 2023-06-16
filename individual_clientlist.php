@@ -10,11 +10,7 @@ if ($.fn.DataTable.isDataTable('#clientList')) {
 $('#clientList').DataTable({});
 });
 </script>  
-<script>
-     $(document).ready(function() {
-    $('#client_btn').addClass('selected');
-});
-</script>   
+   
 
 <!-- MODAL HERE START HERE  --> 
 <!--  ADD CLIENT MODAL -->
@@ -335,5 +331,10 @@ $('#clientList').DataTable({});
        </div> 
    <!-- SCRIPT HERE  -->
 <script src="./client/client_controller.js"></script>
+<script src="./src/js/routing.js"></script>
 
-       
+<script>
+     $(document).ready(function() {
+    $('#client_btn').addClass('selected');
+});
+</script>
