@@ -47,13 +47,26 @@
               CASES
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" data-page="case_caselist" data-page="case_caselist">CASE LIST</a></li>
+              <li><a class="dropdown-item"  data-page="case_caselist">CASE LIST</a></li>
               <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li>
               <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li>
             </ul>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color:#ADA06D;">Contact</a>
+            <a class="nav-link"  data-page="users" style="color:#ADA06D;" id="user_btn">USERS</a>
+          </li>
+
+          <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle" href="#" id="cases_btn" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" style="color:#ADA06D;" >
+              TASK
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" data-page="case_caselist" data-page="case_caselist">CASE LIST</a></li>
+              <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li>
+              <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -82,9 +95,10 @@
   if (userRole === 'Chief Lawyer') {
       // Remove the button from the DOM
       button.parentNode.removeChild(button);
-  } else {
-      // Hide the button
       button.style.display = 'none';
+  } else if (userRole === 'Associate Lawyer') {
+      // Hide the button
+      button.style.display = 'block';
   }
 
   </script>

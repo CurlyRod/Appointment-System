@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="./vendor/fontawesome/fontawesome.css">
   <link rel="stylesheet" href="./vendor/datatable/jquery.dataTables.min.css">
   <link rel="stylesheet" href="./vendor/alertify/alertify.min.css">
+  
   <link rel="stylesheet" href="./src/css/style.css">  
   <title>BONGALON LAW FIRM</title>
 </head>
@@ -36,6 +38,7 @@
   <script src="./vendor/js/bootstrap.bundle.min.js"  type="text/javascript"></script>
   <script src="./vendor/sweetalert/sweetalert2@11.js" type="text/javascript"> </script>  
   <script src="./vendor/alertify/alertify.min.js" type="text/javascript"></script>  
+  <script src="./vendor/fontawesome/all.min.js" type="text/javascript"></script>
   <script src="./src/js/routing.js"></script>  
  
  
