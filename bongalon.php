@@ -1,3 +1,24 @@
+
+<?php
+session_start(); // Start the session
+
+include './db/config.php';
+
+if (!isset($_SESSION['id'])) {
+    header("location: index.php");
+    exit; // Terminate the script to prevent further execution
+}
+
+$id = $_SESSION['id'];
+
+$sql = "SELECT * FROM tbl_user_list WHERE id = '$id'";
+$res = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($res);
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
