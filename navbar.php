@@ -58,14 +58,14 @@
           </li>
 
           <li class="nav-item dropdown" >
-            <a class="nav-link dropdown-toggle" href="#" id="cases_btn" role="button" data-bs-toggle="dropdown"
+            <a class="nav-link dropdown-toggle" href="#" id="manage_task" role="button" data-bs-toggle="dropdown"
               aria-expanded="false" style="color:#ADA06D;" >
               TASK
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" data-page="case_caselist" data-page="case_caselist">CASE LIST</a></li>
-              <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li>
-              <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li>
+              <li><a class="dropdown-item" data-page="manage_task" >MANAGE TASK</a></li>
+              <li><a class="dropdown-item" data-page="case_teammember">PROGRESS</a></li>
+              <li><a class="dropdown-item" id="btn_services" name="btn_services"data-page="manage_caseupdate">CASE UPDATE</a></li>
             </ul>
           </li>
         </ul>

@@ -2,7 +2,6 @@
 $(document).on('click','#view_client_info',function(e){
     e.preventDefault();
       var view_entity_info = $(this).val(); 
-    
        $.ajax({
            type:'GET',url:'./php/cases_ajax.php?view_case_info='+view_entity_info,
            success:function(response)
@@ -169,6 +168,7 @@ $(document).on('click','#assign_lawyer_Btn',function(){
                   $("#client_user_id_edit").val(result.data.id);  
               
                   var client = result.data.client_user_id;
+                  
                   $("#edit_select_client_list option").each(function() {
                     if ($(this).val() == client) {
                       $(this).prop("selected", true);
@@ -181,6 +181,9 @@ $(document).on('click','#assign_lawyer_Btn',function(){
                 
                   $("#editClientModal").modal("show"); 
              
+
+
+
               }
         }
   

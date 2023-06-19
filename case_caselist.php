@@ -32,7 +32,7 @@ $('#caseLists').DataTable({});
              <p id="edit_client_case_number"></p>
               </div>
               <div class="col mb-2"> 
-                 <input type="text" id="client_user_id_edit"name="client_user_id_edit">
+                 <input type="hidden" id="client_user_id_edit"name="client_user_id_edit">
                 Client name:
                  <select class="form-select" aria-label="Default select example" id="edit_select_client_list" name="edit_select_client_list">
                  <option >Select Client Name</option>

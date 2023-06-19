@@ -8,7 +8,8 @@ if(isset($_GET['view_case_info']))
     cases.start_date,cases.end_date,cases.remarks,cases.case_status,cases.client_user_id
     FROM tbl_case_list as cases 
     INNER JOIN tbl_client_list as client ON client.id = cases.client_user_id
-    INNER JOIN tbl_user_list as lawyer  WHERE cases.id ='$userId' GROUP BY cases.case_number ORDER BY cases.id DESC";
+    INNER JOIN tbl_user_list as lawyer  WHERE cases.id ='$userId' GROUP BY cases.case_number ORDER BY cases.id DESC"; 
+  
     $execute_query = mysqli_query($conn,$selectID); 
 
     //CHECK RETURNING VALUE 
@@ -172,7 +173,6 @@ if(isset($_POST['case_list_update']))
 }
 
 // SUBMIT THE LAWYER
-
 
 
 
