@@ -30,7 +30,59 @@ $('#taskLists').DataTable({});
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p id="sample_ids"></p>
+      <table id="taskList" class="table table-hover" style="width:100%;font-size:12px;">
+                                  <thead>
+                                    <tr>
+                                    <th class="text-center" style="width:20px;">#</th>
+                                    <th class="text-center " >Case Number</th>
+                                    <th class="text-center">Client Name</th>
+                                    <th class="text-center" >Laywer</th>
+                                    <th class="text-center">Case type</th>
+                                    <th class="text-center">Case Sub type</th>
+
+                                    <!-- <th class="text-center">Remarks</th> -->
+                                    <th class="text-center" >ACTION</th>
+                                  </tr>
+                                  </thead> 
+                              <tbody class="table-warning">
+                              <?php
+                                require './db/config.php';  
+
+                                $client_list = "SELECT user.id,cases.lawyer_user_id,user.user_fullname,client.firstname,client.middlename,client.lastname,cases.case_status,cases.case_number,cases.case_sub_type,cases.case_type,
+                                cases.end_date, cases.task, cases.remarks
+                                FROM tbl_case_list as cases
+                                INNER JOIN tbl_user_list AS user ON cases.lawyer_user_id = user.id
+                                INNER JOIN tbl_client_list AS client WHERE  cases.client_user_id = client.id";
+                                $query = $conn->query($client_list);
+                                $i = 1; 
+                                while($row= $query->fetch_assoc()):           
+				                    ?>
+                                <tr>
+                                    <td class="text-center"><?php echo $i++?></td>
+                                    <td class="text-center" ><b><?php echo $row['case_number'];?></b></td>
+                                    <td class="text-center"><?php echo $row['firstname'].' '.$row['middlename'] .' '. $row['lastname']?></td>                      
+                                    <td class="text-center"><?php if( $row['lawyer_user_id']== 0){ echo  $row['lawyer_user_id'] = 'none';  }else echo $row['user_fullname'];?> </td>
+                            
+                                    <td class="text-center"><?php echo $row['case_type'];?></td>
+                                    <td class="text-center"><?php echo $row['case_sub_type'];?></td>
+                                    <!-- <td class="text-center"><?php echo $row['remarks'];?></td> -->
+                                    <td>      
+                                    <div class="container d-flex justify-content-end ">                                             
+                                        <div class="col-md-4 "><button class="btn btn-sm btn-primary" id="view_task_infos"  value="<?php echo $row['id']?>" style="font-size:10px;">View Task</button></div>   
+                                        <!-- <div class="col-md-3"><button class="btn btn-sm btn-danger"id="delete_client_info"  value="<?php echo $row['id']?>"><img src="./src/img/trash-can.png" alt=""></button></div> -->
+                                        <div class="col-md-4"><button class="btn btn-sm btn-success"id="reassign_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Re-Assign</button></div> 
+                                        <div class="col-md-4"><button class="btn btn-sm btn-warning"id="addtask_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Add Task</button></div> 
+                                  
+                                  </
+                                    </div>
+                                    </td>
+
+                                </tr>
+                            <?php endwhile;?>
+                            </tbody>
+                        </table>
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -154,7 +206,7 @@ $('#taskLists').DataTable({});
                                     <!-- <td class="text-center"><?php echo $row['remarks'];?></td> -->
                                     <td>      
                                     <div class="container d-flex justify-content-end ">                                             
-                                        <div class="col-md-4 "><button class="btn btn-sm btn-primary" id="view_task_info"  value="<?php echo $row['id']?>" style="font-size:10px;">View Task</button></div>   
+                                        <div class="col-md-4 "><button class="btn btn-sm btn-primary" id="view_task_infos"  value="<?php echo $row['id']?>" style="font-size:10px;">View Task</button></div>   
                                         <!-- <div class="col-md-3"><button class="btn btn-sm btn-danger"id="delete_client_info"  value="<?php echo $row['id']?>"><img src="./src/img/trash-can.png" alt=""></button></div> -->
                                         <div class="col-md-4"><button class="btn btn-sm btn-success"id="reassign_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Re-Assign</button></div> 
                                         <div class="col-md-4"><button class="btn btn-sm btn-warning"id="addtask_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Add Task</button></div> 
@@ -177,8 +229,10 @@ $('#taskLists').DataTable({});
 <script>
  $(document).ready(function() {
  $('#manage_task').addClass('selected'); 
+});  
 
- $(document).on('click','#reassign_client_info',function(){ 
+
+$(document).on('click','#reassign_client_info',function(){ 
 
 var user_id = $(this).val();
 console.log(user_id);
@@ -203,17 +257,12 @@ $.ajax({
                 ) 
                 $("#client_user_id_update").val(result.data.id);
 
-            $('#Reassign_lawyer_Modal').modal('show');  
-           
+            $('#Reassign_lawyer_Modal').modal('show');    
         } 
-
     }
-
-
 });
 
 });
-}); 
 
 
 
@@ -256,145 +305,8 @@ $(document).on('submit',"#Reassign_lawyer_Forms",function(e){
   }); 
 
 
-  // $(document).on('click','#view_task_info',function(e){
-  //   e.preventDefault();
-  //     var view_entity_info = $(this).val(); 
-  //      $.ajax({
-  //          type:'GET',url:'./php/cases_ajax.php?view_case_info='+view_entity_info,
-  //          success:function(response)
-  //          { 
-  //              var result = jQuery.parseJSON(response);
-  //              if(result.status == 404)
-  //              {
-  //               alertify.set('notifier', 'delay', 1); 
-  //               alertify.set('notifier', 'position', 'top-right');  
-  //               alertify.success(result.message);
-  //              }else if(result.status == 200)
-  //              { 
-  //                  $('#sample_ids').html("Case Number: <span class='name fw-bold'>" + result.data.case_number+"</span><br>"+"Client Name: <span class='name'>" + result.data.firstname +" "+ result.data.middlename  +" "+  result.data.lastname+ "</span><br>" 
-  //                  +"Case Type: <span class='name'>" + result.data.case_type+"</span><br>" 
-  //                  +"Case Sub Type: <span class='name'>" + result.data.case_sub_type+"</span><br>" 
-  //                  +"Case Number: <span class='name'>" + result.data.user_fullname+"</span><br>" 
-  //                  +"Client Type: <span class='name'>" + result.data.client_type+"</span><br>"); 
-                 
-  //                  $('#exampleModal').modal('show'); 
-  //                  console.log(result.data.case_number);
-  //              }
-  //          }
-   
-  //      });
-  //   }); 
-
-//   $(document).on('click', '#view_task_info', function(e) {
-//     e.preventDefault();
-//     var view_entity_info = $(this).val();
-//     $.ajax({
-//         type: 'GET',
-//         url: './php/cases_ajax.php',
-//         data: {
-//             view_case_info: view_entity_info
-//         },
-//         dataType: 'json',
-//         success: function(response) {
-//             console.log(response); // Debugging: Log the response object
-//             if (response.status == 404) {
-//                 alertify.set('notifier', 'delay', 1);
-//                 alertify.set('notifier', 'position', 'top-right');
-//                 alertify.success(response.message);
-//             } else if (response.status == 200) {
-//                 var data = response.data;
-//                 var tableBody = $('#modal-table-body');
-//                 tableBody.empty();
-//                 $.each(data, function(index, item) {
-//                     console.log(item); // Debugging: Log the item object
-//                     var row = $('<tr>');
-//                     $('<td>').text(item.case_number || '').appendTo(row);
-//                     $('<td>').text(item.firstname + ' ' + item.middlename + ' ' + item.lastname || '').appendTo(row);
-//                     $('<td>').text(item.case_type || '').appendTo(row);
-//                     $('<td>').text(item.case_sub_type || '').appendTo(row);
-//                     $('<td>').text(item.user_fullname || '').appendTo(row);
-//                     $('<td>').text(item.client_type || '').appendTo(row);
-//                     tableBody.append(row);
-//                 });
-//                 $('#exampleModal').modal('show');
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error(xhr.responseText);
-//         }
-//     });
-// });
-// $(document).on('click', '#view_task_info', function(e) {
-//     e.preventDefault();
-//     var view_entity_info = $(this).val();
-//     $.ajax({
-//         type: 'GET',
-//         url: './php/cases_ajax.php',
-//         data: {
-//             view_case_info: view_entity_info
-//         },
-//         dataType: 'json',
-//         complete: function(response) {
-//             console.log(response); // Debugging: Log the response object
-//             if (response.status == 404) {
-//                 alertify.set('notifier', 'delay', 1);
-//                 alertify.set('notifier', 'position', 'top-right');
-//                 alertify.success(response.responseJSON.message);
-//             } else if (response.status == 200) {
-//                 var data = response.responseJSON.data;
-//                 var tableBody = $('#modal-table-body');
-//                 tableBody.empty();
-//                 $.each(data, function(index, item) {
-//                     console.log("sample"+item); // Debugging: Log the item object
-//                     var row = $('<tr>');
-//                     $('<td>').text(item.case_number || '').appendTo(row);
-//                     $('<td>').text(item.firstname + ' ' + item.middlename + ' ' + item.lastname || '').appendTo(row);
-//                     $('<td>').text(item.case_type || '').appendTo(row);
-//                     $('<td>').text(item.case_sub_type || '').appendTo(row);
-//                     $('<td>').text(item.user_fullname || '').appendTo(row);
-//                     $('<td>').text(item.client_type || '').appendTo(row);
-//                     tableBody.append(row);
-//                 });
-//                 $('#exampleModal').modal('show');
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error(xhr.responseText);
-//         }
-//     });
-// });
-
- $(document).on('click','#view_task_info',function(e){
-    e.preventDefault();
-      var view_entity_info = $(this).val();  
-      console.log(view_entity_info);
-       $.ajax({
-           type:'GET',url:'./php/sampleview.php?view_cases_info='+view_entity_info,
-           success:function(response)
-           { 
-               var result = jQuery.parseJSON(response);
-               if(result.status == 404)
-               {
-                alertify.set('notifier', 'delay', 1); 
-                alertify.set('notifier', 'position', 'top-right');  
-                alertify.success(result.message);
-               }else if(result.status == 200)
-               { 
-                   $('#sample_ids').html("Case Number: <span class='name fw-bold'>" + result.data.case_number+"</span><br>"+"Client Name: <span class='name'>" + result.data.firstname +" "+ result.data.middlename  +" "+  result.data.lastname+ "</span><br>" 
-                  //  +"Case Type: <span class='name'>" + result.data.case_type+"</span><br>" 
-                  //  +"Case Sub Type: <span class='name'>" + result.data.case_sub_type+"</span><br>" 
-                  //  +"Case Number: <span class='name'>" + result.data.user_fullname+"</span><br>" 
-                  //  +"Client Type: <span class='name'>" + result.data.client_type+"</span><br>" 
-                  ); 
-                 
-                   $('#exampleModal').modal('show'); 
-                  
-               }
-           }
-   
-       });
-    
-  });
+  //
 
 
-</script>
+</script> 
+<script src="./cases/viewtask.js"></script>

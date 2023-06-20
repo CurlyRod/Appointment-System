@@ -168,22 +168,19 @@ $(document).on('click','#assign_lawyer_Btn',function(){
                   $("#client_user_id_edit").val(result.data.id);  
               
                   var client = result.data.client_user_id;
-                  
+                 
                   $("#edit_select_client_list option").each(function() {
                     if ($(this).val() == client) {
                       $(this).prop("selected", true);
+                      $(this).prop("disabled", true); // add disabled attribute
                       return false; // exit the loop if found
                     }
                   });
-  
+                  
                   $('#edit_client_case_number').html("Case Number: <span class='name'>" + result.data.case_number+"</span><br>"
                   );
                 
                   $("#editClientModal").modal("show"); 
-             
-
-
-
               }
         }
   

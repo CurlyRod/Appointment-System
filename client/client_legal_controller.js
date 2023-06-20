@@ -185,40 +185,40 @@ var legal_user_ids = $(this).val();
 
 
 //UPDATE CLIENT INFORMATION
-$(document).on('submit',"#update_entity_Forms",function(e){
-    e.preventDefault();
+// $(document).on('submit',"#update_entity_Forms",function(e){
+//     e.preventDefault();
    
-    var formData = new FormData(this);
-    formData.append("legal_update_client",true);
-    $.ajax({ 
-      type:"POST",url:"./php/client_ajax.php",data:formData,
-      processData:false,contentType:false,
+//     var formData = new FormData(this);
+//     formData.append("legal_update_client",true);
+//     $.ajax({ 
+//       type:"POST",url:"./php/client_ajax.php",data:formData,
+//       processData:false,contentType:false,
     
-      success:function(response)
-      {
-          var result = jQuery.parseJSON(response); 
-          if(result.status == 500)
-          {
-            alertify.set('notifier','positions','top-right'); 
-            alertify.success(result.message); 
-          }
-          else if(result.status == 200)
-          {
+//       success:function(response)
+//       {
+//           var result = jQuery.parseJSON(response); 
+//           if(result.status == 500)
+//           {
+//             alertify.set('notifier','positions','top-right'); 
+//             alertify.success(result.message); 
+//           }
+//           else if(result.status == 200)
+//           {
          
-            alertify.set('notifier','positions','top-right'); 
-            alertify.success(result.message); 
+//             alertify.set('notifier','positions','top-right'); 
+//             alertify.success(result.message); 
           
-            $('#editentityUserModal').modal('hide');
-           $('#update_entity_Forms')[0].reset();
-            //  $('#userList').load(location.href+ " #userList");;
-            loadContent('legal_clientlist'); 
-            } 
+//             $('#editentityUserModal').modal('hide');
+//            $('#update_entity_Forms')[0].reset();
+//             //  $('#userList').load(location.href+ " #userList");;
+//             loadContent('legal_clientlist'); 
+//             } 
        
-         // abortController.abort();
-       $(document).off('submit', '#update_entity_Forms');
-      } 
+//          // abortController.abort();
+//        $(document).off('submit', '#update_entity_Forms');
+//       } 
   
   
-    });
-  //  xhr.abort(); 
-  }); 
+//     });
+//   //  xhr.abort(); 
+//   }); 

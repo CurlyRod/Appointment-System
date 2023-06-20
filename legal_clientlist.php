@@ -74,7 +74,7 @@ $('#entityList').DataTable({});
             </div>
             <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" id="edit_legal_btn"class="btn btn-warning">Save changes</button>
+        <button type="button" id="updateEntityBtn"class="btn btn-warning">Save changes</button>
       </div>
             </div>
        
@@ -274,3 +274,42 @@ $('#entityList').DataTable({});
     </div>
 </div> 
 <script src="./client/client_legal_controller.js"></script>
+<script>
+     $(document).ready(function() {
+    $('#client_btn').addClass('selected');
+}); 
+
+
+$('#updateEntityBtn').on('click', function(e) {
+    e.preventDefault();
+
+    var formData = new FormData($('#update_entity_Forms')[0]);
+    formData.append("legal_update_client", true);
+      $.ajax({
+        type: "POST",
+        url: "./php/client_ajax.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var res = jQuery.parseJSON(response);
+
+            if (res.status == 422) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(res.message);
+            } else if (res.status == 200) {
+                alertify.set('notifier', 'delay', 1);
+                alertify.set('notifier', 'position', 'top-right'); 
+                alertify.success(res.message);
+
+            
+                $('#editentityUserModal').modal('hide');
+                $('#update_entity_Forms')[0].reset();
+
+                loadContent('legal_clientlist');
+            } 
+        }
+    });
+});
+</script>

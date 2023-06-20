@@ -111,7 +111,7 @@ $(document).on('click','#delete_client_individual',function(e){
                  {
                      alertify.set('notifier','positions','top-right'); 
                      alertify.success(result.message); 
-                     loadContent('individual_clientlist.php');
+                     loadContent('individual_clientlist');
                  }
              }
          });
@@ -163,48 +163,90 @@ $(document).on('click','#edit_client_information',function(){
 
    // SUBMIT INFORMATION IN THE DATABASE CLIENT INFORMATION
 
-   $(document).on('submit',"#updateClientForm",function(e){
-    e.preventDefault();
+//    $(document).on('submit',"#updateClientForm",function(e){
+//     e.preventDefault();
    
-    var formData = new FormData(this);
-    formData.append("update_client",true);
-    $.ajax({ 
-      type:"POST",url:"./php/client_ajax.php",data:formData,
-      processData:false,contentType:false,
+//     var formData = new FormData(this);
+//     formData.append("update_client",true);
+//     $.ajax({ 
+//       type:"POST",url:"./php/client_ajax.php",data:formData,
+//       processData:false,contentType:false,
     
-      success:function(response)
-      {
-          var result = jQuery.parseJSON(response); 
-          if(result.status == 422)
-          {
-              $('#errorMessage').removeClass('d-none');   
-              $('#errorMessage').text(result.message);
-          }
-          else if(result.status == 200)
-          {
-           $('#errorMessage').removeClass('d-none'); 
+//       success:function(response)
+//       {
+//           var result = jQuery.parseJSON(response); 
+//           if(result.status == 422)
+//           {
+//               $('#errorMessage').removeClass('d-none');   
+//               $('#errorMessage').text(result.message);
+//           }
+//           else if(result.status == 200)
+//           {
+//            $('#errorMessage').removeClass('d-none'); 
            
-           $('#editIndividual').modal('hide');
-           $('#updateClientForm')[0].reset();
+//            $('#editIndividual').modal('hide');
+//            $('#updateClientForm')[0].reset();
 
-              alertify.set('notifier','positions','top-right'); 
-              alertify.success(result.message); 
-              $('#clientList').load(location.href+ " #clientList");;
-              $("#editindividual").modal("hide"); 
-              console.log(result.message);
-              loadContent('individual_clientlist'); 
-          } 
+//               alertify.set('notifier','positions','top-right'); 
+//               alertify.success(result.message); 
+           
+//               $("#editindividual").modal("hide"); 
+//               console.log(result.message);
+//               loadContent('individual_clientlist'); 
+//           } 
         
-         // abortController.abort();
-       $(document).off('submit', '#updateClientForm');
-      } 
+//          // abortController.abort();
+//        $(document).off('submit', '#updateClientForm');
+//       } 
 
 
-    });
-  //  xhr.abort(); 
-}); 
+//     });
+//   //  xhr.abort(); 
+// }); 
 
 // START LEGAL ENTITY HERE///
+// $(document).on('submit', "#updateClientForm", function(e) {
+//     e.preventDefault();
+  
+//     var formData = new FormData(this);
+//     formData.append("update_client", true);
+  
+//     $.ajax({
+//       type: "POST",
+//       url: "./php/client_ajax.php",
+//       data: formData,
+//       processData: false,
+//       contentType: false,
+  
+//       success: function(response) {
+//         var result = jQuery.parseJSON(response);
+//         if (result.status == 422) {
+//           $('#errorMessage').removeClass('d-none');
+//           $('#errorMessage').text(result.message);
+//         } else if (result.status == 200) {
+//           $('#errorMessage').removeClass('d-none');
+  
+//           $('#editIndividual').modal('hide');
+//           $('#updateClientForm')[0].reset();
+  
+//           if (!result.notificationShown) {
+//             alertify.set('notifier', 'positions', 'top-right');
+//             alertify.success(result.message);
+//             result.notificationShown = true; // Update the flag variable
+//           }
+  
+//           $("#editindividual").modal("hide");
+       
+//           loadContent('individual_clientlist');
+//         }
+  
+//         $(document).off('submit', '#updateClientForm');
+//       }
+//     });
+//   });
+  
+
+  
 
 
 // END LEGAL ENTITY HERE // 

@@ -8,7 +8,8 @@ if ($.fn.DataTable.isDataTable('#caseLists')) {
 }
 // Reinitialize the DataTable
 $('#caseLists').DataTable({});
-});  
+});   
+$('#edit_select_client_list').selectpicker();
 </script> 
  
 <!-- MODAL START HERE --> 
@@ -35,9 +36,8 @@ $('#caseLists').DataTable({});
                  <input type="hidden" id="client_user_id_edit"name="client_user_id_edit">
                 Client name:
                  <select class="form-select" aria-label="Default select example" id="edit_select_client_list" name="edit_select_client_list">
-                 <option >Select Client Name</option>
                  <?php   while($row = mysqli_fetch_array($result)):;?>
-                 <option id="caseId"value="<?php echo $row[0]?>"><?php  echo $row[1] ?>
+                 <option disabled id="caseId"value="<?php echo $row[0]?>"><?php  echo $row[1] ?>
                  <?php  echo $row[2]?>   <?php  echo $row[3]?>
                 </option> 
                 <?php   endwhile; ?>
@@ -104,7 +104,7 @@ $('#caseLists').DataTable({});
 
             <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" id="updateCaseBtn"class="btn btn-warning">Save changes</button>
+        <button type="button" id="updateCaseBtn"class="btn btn-warning">Save changes</button>
       </div>
 
         </div>
@@ -318,43 +318,81 @@ $('#caseLists').DataTable({});
     $('#cases_btn').addClass('selected');
 }); 
 
-$(document).on('submit',"#update_client_Forms",function(e){
-    e.preventDefault();
+// $(document).off('submit', '#update_client_Forms').on('submit', '#update_client_Forms', function(e){
+  
+//     e.preventDefault();
    
-    var formData = new FormData(this);
-    formData.append("case_list_update",true);
-    $.ajax({ 
-      type:"POST",url:"./php/cases_ajax.php",data:formData,
-      processData:false,contentType:false,
+//     var formData = new FormData(this);
+//     formData.append("case_list_update",true);
+//     $.ajax({ 
+//       type:"POST",url:"./php/cases_ajax.php",data:formData,
+//       processData:false,contentType:false,
     
-      success:function(response)
-      {
-          var result = jQuery.parseJSON(response); 
-          if(result.status == 500)
-          {
-            alertify.set('notifier','positions','top-right'); 
-            alertify.success(result.message); 
-          }
-          else if(result.status == 200)
-          {
+//       success:function(response)
+//       {
+//           var result = jQuery.parseJSON(response); 
+//           if(result.status == 500)
+//           {
+//             alertify.set('notifier','positions','top-right'); 
+//             alertify.success(result.message); 
+//           }
+//           else if(result.status == 200)
+//           {
          
-            alertify.set('notifier','positions','top-right'); 
-            alertify.success(result.message); 
+//             alertify.set('notifier','positions','top-right'); 
+//             alertify.success(result.message); 
           
-            $('#editClientModal').modal('hide');
-           $('#update_client_Forms')[0].reset();
-            //  $('#userList').load(location.href+ " #userList");;
-            loadContent('case_caselist'); 
-            } 
+//             $('#editClientModal').modal('hide');
+//            $('#update_client_Forms')[0].reset();
+//             //  $('#userList').load(location.href+ " #userList");;
+//           //  loadContent('case_caselist'); 
+//             } 
        
-         // abortController.abort();
-       $(document).off('submit', '#update_client_Forms');
-      } 
+//          // abortController.abort();
+//        $(document).off('submit', '#update_client_Forms');
+//       } 
   
   
+//     });
+//   //  xhr.abort(); 
+//   }); 
+
+
+
+
+  
+$('#updateCaseBtn').on('click', function(e) {
+    e.preventDefault();
+
+    var formData = new FormData($('#update_client_Forms')[0]);
+    formData.append("case_list_update", true);
+      $.ajax({
+        type: "POST",
+        url: "./php/caseupdate.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var res = jQuery.parseJSON(response);
+
+            if (res.status == 422) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(res.message);
+            } else if (res.status == 200) {
+                alertify.set('notifier', 'delay', 1);
+                alertify.set('notifier', 'position', 'top-right'); 
+                alertify.success(res.message);
+
+            
+                $('#editClientModal').modal('hide');
+                $('#update_client_Forms')[0].reset();
+                 loadContent('case_caselist'); 
+            } 
+        }
     });
-  //  xhr.abort(); 
-  }); 
+});
+
 
 </script> 
 

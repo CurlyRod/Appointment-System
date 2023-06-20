@@ -206,7 +206,7 @@ $('#clientList').DataTable({});
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <!-- <button type="submit" class="btn btn-warning">Save changes</button> -->
-                    <button type="submit" class="btn btn-warning">Save changes</button>
+                    <button type="button" id="updateClientBtn" class="btn btn-warning">Save changes</button>
                 </div>
                  
                 
@@ -337,4 +337,41 @@ $('#clientList').DataTable({});
      $(document).ready(function() {
     $('#client_btn').addClass('selected');
 });
+
+
+
+
+$('#updateClientBtn').on('click', function(e) {
+    e.preventDefault();
+
+    var formData = new FormData($('#updateClientForm')[0]);
+    formData.append("update_client", true);
+      $.ajax({
+        type: "POST",
+        url: "./php/client_ajax.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            var res = jQuery.parseJSON(response);
+
+            if (res.status == 422) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(res.message);
+            } else if (res.status == 200) {
+                alertify.set('notifier', 'delay', 1);
+                alertify.set('notifier', 'position', 'top-right'); 
+                alertify.success(res.message);
+
+            
+                $('#editindividual').modal('hide');
+                $('#updateClientForm')[0].reset();
+
+                loadContent('individual_clientlist');
+            } 
+        }
+    });
+});
+
 </script>

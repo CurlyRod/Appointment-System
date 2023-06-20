@@ -28,9 +28,14 @@ $row = mysqli_fetch_assoc($res);
   <link rel="stylesheet" href="./vendor/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="./vendor/fontawesome/fontawesome.css">
   <link rel="stylesheet" href="./vendor/datatable/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="./vendor/alertify/alertify.min.css">
+  <link rel="stylesheet" href="./vendor/alertify/alertify.min.css"> 
+
   
   <link rel="stylesheet" href="./src/css/style.css">  
+  <script src="./vendor/js/jquery-3.6.1.js" type="text/javascript"> </script>   
+  <link rel="stylesheet" href="./select2/select2.min.css">
+  <script src="./select2/select2.min.js"></script>
+ 
   <title>BONGALON LAW FIRM</title>
 </head>
 
@@ -44,7 +49,11 @@ $row = mysqli_fetch_assoc($res);
     color: #0D0D0D;
     font-size: 16px;
     font-weight:500;
-    }
+    } 
+    #cardTask {
+  display: none;
+  /* Other card styles */
+}
 </style>
    
  
@@ -54,13 +63,14 @@ $row = mysqli_fetch_assoc($res);
 
   
  
-  <script src="./vendor/js/jquery-3.6.1.js" type="text/javascript"> </script>   
+
   <script src="./vendor/js/jquery.dataTables.min.js"></script>
   <script src="./vendor/js/bootstrap.bundle.min.js"  type="text/javascript"></script>
   <script src="./vendor/sweetalert/sweetalert2@11.js" type="text/javascript"> </script>  
   <script src="./vendor/alertify/alertify.min.js" type="text/javascript"></script>  
   <script src="./vendor/fontawesome/all.min.js" type="text/javascript"></script>
   <script src="./src/js/routing.js"></script>  
+
  
  
 <script>
@@ -102,7 +112,9 @@ $row = mysqli_fetch_assoc($res);
     }
  });
 
- 
+
+
+
 function timedRefresh(timeoutPeriod) {
     setTimeout("location.reload(true);",timeoutPeriod);   
       }
@@ -126,6 +138,8 @@ function timedRefresh(timeoutPeriod) {
                 }) 
             }
     </script> 
+
+
 </body>
 
 </html>

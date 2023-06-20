@@ -172,8 +172,8 @@ if(isset($_POST['case_list_update']))
 
 }
 
-// SUBMIT THE LAWYER
+// VIEW TASK
 
-
+ 
 
 ?>

@@ -62,7 +62,6 @@ if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 $stmt = $conn->prepare("INSERT INTO tbl_client_list (client_id,firstname , middlename , lastname , gender , first_email, second_email, first_contact,
 second_contact, first_address, second_address) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-
 $stmt->bind_param("sssssssssss", $caseId, $firstName, $middleName, $lastName, $gender, $emailone, $emailtwo, $contactONE,$contactTWO,$addOne,$addTwo); 
 
 

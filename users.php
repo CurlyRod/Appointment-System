@@ -235,42 +235,86 @@ $('#userList').DataTable({});
 
 
 // SUBMIT I8NFORMATION
-  $(document).on('submit',"#update_user_entity_form",function(e){
-  e.preventDefault();
+//   $(document).on('submit',"#update_user_entity_form",function(e){
+//   e.preventDefault();
  
-  var formData = new FormData(this);
-  formData.append("update_account",true);
-  $.ajax({ 
-    type:"POST",url:"./php/users_ajax.php",data:formData,
-    processData:false,contentType:false,
+//   var formData = new FormData(this);
+//   formData.append("update_account",true);
+//   $.ajax({ 
+//     type:"POST",url:"./php/users_ajax.php",data:formData,
+//     processData:false,contentType:false,
   
-    success:function(response)
-    {
-        var result = jQuery.parseJSON(response); 
-        if(result.status == 422)
-        {
-          alertify.set('notifier','positions','top-right'); 
-          alertify.success(result.message); 
-        }
-        else if(result.status == 200)
-        {
+//     success:function(response)
+//     {
+//         var result = jQuery.parseJSON(response); 
+//         if(result.status == 422)
+//         {
+//           alertify.set('notifier','positions','top-right'); 
+//           alertify.success(result.message); 
+//         }
+//         else if(result.status == 200)
+//         {
        
-         $('#editAccountModal').modal('hide');
-         $('#update_user_entity_form')[0].reset();
+//          $('#editAccountModal').modal('hide');
+//          $('#update_user_entity_form')[0].reset();
           
-            alertify.set('notifier', 'delay', 1);
-            alertify.set('notifier','positions','top-right'); 
-            alertify.success(result.message); 
+//             alertify.set('notifier', 'delay', 1);
+//             alertify.set('notifier','positions','top-right'); 
+//             alertify.success(result.message); 
 
-           
-          } 
-        loadContent('users'); 
-       // abortController.abort();
-     $(document).off('submit', '#update_user_entity_form');
-    } 
+//             loadContent('users'); 
+//           } 
+     
+//        // abortController.abort();
+//      $(document).off('submit', '#update_user_entity_form');
+//     } 
+//   });
+// //  xhr.abort(); 
+// });  
+
+var isRequestInProgress = false; // Flag variable to track request status
+
+
+  $(document).off('submit', '#update_user_entity_form').on('submit', '#update_user_entity_form', function(e){
+  e.preventDefault();
+
+  if (isRequestInProgress) {
+    return; // Exit if a request is already in progress
+  }
+
+  isRequestInProgress = true; // Set the flag to indicate a request is in progress
+
+  var formData = new FormData(this);
+  formData.append("update_account", true);
+
+  $.ajax({
+    type: "POST",
+    url: "./php/users_ajax.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+
+    success: function(response) {
+      var result = jQuery.parseJSON(response);
+      if (result.status == 422) {
+        alertify.set('notifier', 'positions', 'top-right');
+        alertify.success(result.message);
+      } else if (result.status == 200) {
+        $('#editAccountModal').modal('hide');
+        $('#update_user_entity_form')[0].reset();
+
+        alertify.set('notifier', 'delay', 1);
+        alertify.set('notifier', 'positions', 'top-right');
+        alertify.success(result.message);
+
+        loadContent('users');
+      }
+
+      isRequestInProgress = false; // Reset the flag to allow future requests
+
+      $(document).off('submit', '#update_user_entity_form');
+    }
   });
-//  xhr.abort(); 
-});  
-
+});
 
 </script> 
