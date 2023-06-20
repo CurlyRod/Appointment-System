@@ -39,6 +39,7 @@ if(isset($_GET['view_case_info']))
         } 
 
 }  
+
 // ADD CASE INFORMATION
 if(isset($_POST['save_case_information']))
 {

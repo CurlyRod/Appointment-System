@@ -297,16 +297,18 @@ var isRequestInProgress = false; // Flag variable to track request status
     success: function(response) {
       var result = jQuery.parseJSON(response);
       if (result.status == 422) {
-        alertify.set('notifier', 'positions', 'top-right');
+        
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.set('notifier', 'delay', 1);
         alertify.success(result.message);
+
       } else if (result.status == 200) {
         $('#editAccountModal').modal('hide');
         $('#update_user_entity_form')[0].reset();
 
+        alertify.set('notifier', 'position', 'top-right');
         alertify.set('notifier', 'delay', 1);
-        alertify.set('notifier', 'positions', 'top-right');
         alertify.success(result.message);
-
         loadContent('users');
       }
 

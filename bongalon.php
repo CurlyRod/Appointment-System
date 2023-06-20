@@ -51,7 +51,7 @@ $row = mysqli_fetch_assoc($res);
     font-weight:500;
     } 
     #cardTask {
-  display: none;
+  display: block;
   /* Other card styles */
 }
 </style>
