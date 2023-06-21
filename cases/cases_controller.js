@@ -167,17 +167,22 @@ $(document).on('click','#assign_lawyer_Btn',function(){
               {
                   $("#client_user_id_edit").val(result.data.id);  
               
-                  var client = result.data.client_user_id;
+                  var client = result.data.lawyer_user_id;
                  
-                  $("#edit_select_client_list option").each(function() {
+                  $("#select_lawyer_id_update option").each(function() {
                     if ($(this).val() == client) {
                       $(this).prop("selected", true);
-                      $(this).prop("disabled", true); // add disabled attribute
+                   
                       return false; // exit the loop if found
                     }
-                  });
-                  
+                  }); 
+                  var client_name = result.data.firstname +" "+result.data.middlename + " "+ result.data.lastname;
+                //   $("#input_select_client_list").val(client_name);
+                   
+
+                
                   $('#edit_client_case_number').html("Case Number: <span class='name'>" + result.data.case_number+"</span><br>"
+                  +"Client Name: <span class='name'>" + client_name +"</span><br>"
                   );
                 
                   $("#editClientModal").modal("show"); 

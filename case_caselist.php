@@ -9,7 +9,7 @@ if ($.fn.DataTable.isDataTable('#caseLists')) {
 // Reinitialize the DataTable
 $('#caseLists').DataTable({});
 });   
-$('#edit_select_client_list').selectpicker();
+
 </script> 
  
 <!-- MODAL START HERE --> 
@@ -34,31 +34,27 @@ $('#edit_select_client_list').selectpicker();
               </div>
               <div class="col mb-2"> 
                  <input type="hidden" id="client_user_id_edit"name="client_user_id_edit">
-                Client name:
-                 <select class="form-select" aria-label="Default select example" id="edit_select_client_list" name="edit_select_client_list">
-                 <?php   while($row = mysqli_fetch_array($result)):;?>
-                 <option disabled id="caseId"value="<?php echo $row[0]?>"><?php  echo $row[1] ?>
-                 <?php  echo $row[2]?>   <?php  echo $row[3]?>
-                </option> 
-                <?php   endwhile; ?>
-                </select>
+                 <input type="hidden" class="form-control" id="input_select_client_list"   name="input_select_client_list">
                 </div> 
 
-                <div class="col-12 mb-2"> 
-                  Client Type:
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="clientType" id="clientType" value="Petitioner">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Petitioner
-                </label>
-                </div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="clientType" id="clientType" value="Respondents">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Repondents
-                </label>
-                </div>
-                </div> 
+                
+             
+                   <div class="col-12 mb-2"> 
+                   <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="editclientType" id="flexRadioDefault1" value="Petitioner">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Petitioner
+                  </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="editclientType" id="flexRadioDefault2" value="Respondents">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Repondents
+                  </label>
+            </div>
+
+              </div>
+
                 <div class="col mb-2">
                 <select class="form-select" aria-label="Default select example"id="case_type_list" name="case_type_list">
                 <option selected>Case Type</option>
@@ -89,9 +85,9 @@ $('#edit_select_client_list').selectpicker();
                   ?> 
             
             <div class="col mb-2">
-
+                  Re-Assign Lawyer
                  <select class="form-select" aria-label="Default select example" id="select_lawyer_id_update" name="select_lawyer_id_update">
-                 <option >Select Lawyer Name</option>
+                 <option disabled>Select Lawyer Name</option>
                  <?php   while($row = mysqli_fetch_array($result)):;?>
                 <option name="lawyer_id" id="lawyer_id"value="<?php echo $row['id']?>"><?php  echo $row['user_fullname'] ?>
                 </option>  
@@ -318,46 +314,6 @@ $('#edit_select_client_list').selectpicker();
     $('#cases_btn').addClass('selected');
 }); 
 
-// $(document).off('submit', '#update_client_Forms').on('submit', '#update_client_Forms', function(e){
-  
-//     e.preventDefault();
-   
-//     var formData = new FormData(this);
-//     formData.append("case_list_update",true);
-//     $.ajax({ 
-//       type:"POST",url:"./php/cases_ajax.php",data:formData,
-//       processData:false,contentType:false,
-    
-//       success:function(response)
-//       {
-//           var result = jQuery.parseJSON(response); 
-//           if(result.status == 500)
-//           {
-//             alertify.set('notifier','positions','top-right'); 
-//             alertify.success(result.message); 
-//           }
-//           else if(result.status == 200)
-//           {
-         
-//             alertify.set('notifier','positions','top-right'); 
-//             alertify.success(result.message); 
-          
-//             $('#editClientModal').modal('hide');
-//            $('#update_client_Forms')[0].reset();
-//             //  $('#userList').load(location.href+ " #userList");;
-//           //  loadContent('case_caselist'); 
-//             } 
-       
-//          // abortController.abort();
-//        $(document).off('submit', '#update_client_Forms');
-//       } 
-  
-  
-//     });
-//   //  xhr.abort(); 
-//   }); 
-
-
 
 
   
@@ -375,19 +331,24 @@ $('#updateCaseBtn').on('click', function(e) {
         success: function(response) {
             var res = jQuery.parseJSON(response);
 
-            if (res.status == 422) {
+            if (res.status == 500) {
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.set('notifier', 'delay', 1); 
                 alertify.success(res.message);
-            } else if (res.status == 200) {
-                alertify.set('notifier', 'delay', 1);
-                alertify.set('notifier', 'position', 'top-right'); 
+            }else if(res.status == 404)
+            {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
                 alertify.success(res.message);
-
-            
-                $('#editClientModal').modal('hide');
-                $('#update_client_Forms')[0].reset();
-                 loadContent('case_caselist'); 
+            } 
+            else if (res.status == 200) 
+            {
+                  alertify.set('notifier', 'delay', 1);
+                  alertify.set('notifier', 'position', 'top-right'); 
+                  alertify.success(res.message);
+                  $('#editClientModal').modal('hide');
+                  $('#update_client_Forms')[0].reset();
+                   loadContent('case_caselist'); 
             } 
         }
     });

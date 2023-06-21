@@ -52,7 +52,7 @@ $(document).on('click','#view_task_info',function(e){
                    $('#viewTaskinformation').html("Case Number: <span class='name fw-bold'>" + result.data.case_number+"</span><br>"+"Client Name: <span class='name'>" + result.data.firstname +" "+ result.data.middlename  +" "+  result.data.lastname+ "</span><br>" 
                    +"Case Type: <span class='name'>" + result.data.case_type+"</span><br>" 
                    +"Case Sub Type: <span class='name'>" + result.data.case_sub_type+"</span><br>" 
-                   +"Case Number: <span class='name'>" + result.data.user_fullname+"</span><br>" 
+                   +"Lawyer name: <span class='name'>" + result.data.user_fullname+"</span><br>" 
                    +"Client Type: <span class='name'>" + result.data.client_type+"</span><br>" 
                    +"Remarks: <span class='name'>" + result.data.remarks+"</span><br>"
                    +"Priority: <span class='name'>" + result.data.priority+"</span><br>" 
@@ -67,4 +67,3 @@ $(document).on('click','#view_task_info',function(e){
     }); 
 
 
-    

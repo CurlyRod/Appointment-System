@@ -120,7 +120,7 @@ $(document).ready(function() {
                   MANAGE TASK
                 </div>
                 <div class="col">
-                    <button class="btn btn-sm btn-warning" id="toggleButton">Add task</button>
+                    <button class="btn btn-sm btn-warning" id="toggleButton">Hide Form</button>
                 </div>
                </div>
             </div> 
@@ -198,7 +198,7 @@ $(document).ready(function() {
     </div>
   
     <div class="col" id="cardTask" style="background:#F5F5F5;">
-        <div class="card " style="height:450px;";>
+        <div class="card " style="height:470px;";>
           <div class="card-header fw-bold mt-1" style="border-bottom:5px solid #C6A984;">Task Information</div>
              <div class="card-body">
 
@@ -240,9 +240,13 @@ $(document).ready(function() {
                 <div class="col p-3">
 
                 <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="add_task_description"name="add_task_description">
+                <label for="add_task_remarks">Task Description</label>
+               </div>
+               <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="add_task_remarks"name="add_task_remarks">
                 <label for="add_task_remarks">Remarks</label>
-              </div>
+               </div>
                     <select class="form-select mb-4" aria-label="Default select example"id="priority_select" name="priority_select">
                     <option disabled selected>Status</option>
                     <option value="High">High</option>
@@ -251,12 +255,11 @@ $(document).ready(function() {
                       </select> 
               </form>
              <div class="col">
-             <div class="row p-2">
+          
                 <div class="col text-end">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" id="addTaskBtns" class="btn btn-warning">Save changes</button>
                 </div>
-                </div>
+              
                 
              </div>
                 </div>

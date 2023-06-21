@@ -9,6 +9,7 @@ if(isset($_POST['reassign_lawyer_update']))
         $client_information = $conn->prepare(" UPDATE tbl_case_list SET lawyer_user_id = ? WHERE id = ? ");
         $client_information->bind_param("ii",$lawyer_select,$client_id);
        
+
         $result = $client_information->execute();
        
         if ($result) {
