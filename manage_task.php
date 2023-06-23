@@ -180,9 +180,10 @@ $(document).ready(function() {
                                     <div class="container d-flex justify-content-end ">                                             
                                         <div class="col-md-4 "><button class="btn btn-sm btn-primary" id="view_task_info"  value="<?php echo $row['id']?>"><img src="./src/img/view (1).png"alt=""></button></div>   
                                         <div class="col-md-4"><button class="btn btn-sm btn-danger"id="delete_tasks_info"  value="<?php echo $row['id']?>"><img src="./src/img/trash-can.png" alt=""></button></div>
-                                        <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_client_info"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div> 
+                                        <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_clien"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div> 
                                         <!-- <div class="col-md-3"><button class="btn btn-sm btn-secondary"id="addtask_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Add Task</button></div>  -->
-                                  
+                                        <!-- <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_client_info"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div>  -->
+                                      
                                   </
                                     </div>
                                     </td>
@@ -241,7 +242,7 @@ $(document).ready(function() {
 
                 <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="add_task_description"name="add_task_description">
-                <label for="add_task_remarks">Task Description</label>
+                <label for="add_task_description">Task Description</label>
                </div>
                <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="add_task_remarks"name="add_task_remarks">
@@ -269,7 +270,7 @@ $(document).ready(function() {
         </div>
     </div>
 </div> 
-<script src="./task/tas_controller.js"></script>
+<script src="./task/task_controller.js"></script>
 <script>
      $(document).ready(function() {
     $('#manage_task').addClass('selected'); 

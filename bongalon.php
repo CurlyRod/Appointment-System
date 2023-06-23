@@ -29,20 +29,49 @@ $row = mysqli_fetch_assoc($res);
   <link rel="stylesheet" href="./vendor/fontawesome/fontawesome.css">
   <link rel="stylesheet" href="./vendor/datatable/jquery.dataTables.min.css">
   <link rel="stylesheet" href="./vendor/alertify/alertify.min.css"> 
-
+  <link rel="stylesheet" href="./vendor/fullcalendar/lib/main.min.css">
   
   <link rel="stylesheet" href="./src/css/style.css">  
   <script src="./vendor/js/jquery-3.6.1.js" type="text/javascript"> </script>   
   <link rel="stylesheet" href="./select2/select2.min.css">
-  <script src="./select2/select2.min.js"></script>
+  <script src="./select2/select2.min.js"></script> 
+  <script src="./vendor/fullcalendar/lib/main.min.js"></script>
  
   <title>BONGALON LAW FIRM</title>
 </head>
 
 <body>  
+<?php 
+      include('./db/config.php');
+
+      $sql = "SELECT user_fullname,user_role FROM tbl_user_list  WHERE id = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param('i', $_SESSION['id']);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      if ($result->num_rows > 0) {
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+              $user_fullname = $row["user_fullname"]; 
+              $user_role = $row["user_role"];  
+              $encodedUserRole = base64_encode($user_role);
+              echo '<script>var userRole = atob("' . $encodedUserRole . '");</script>';
+          } 
+        
+      }
+      $stmt->close()?> 
 
 
-  <?php include 'navbar.php';  ?>
+  <?php
+    if($user_role == 'Chief Lawyer'){
+      include 'navbar.php'; 
+    }else if($user_role == 'Admin'){
+      include 'adminavbar.php'; 
+    }
+
+  
+  
+  ?>
   
   <style>
     .name{
@@ -54,6 +83,18 @@ $row = mysqli_fetch_assoc($res);
   display: block;
   /* Other card styles */
 }
+
+
+        .btn-info.text-light:hover,
+        .btn-info.text-light:focus {
+            background: #000;
+        }
+          td {
+            border-color:#ECE1BE!important;
+            border-style: solid;
+            border-width: 0.1px !important;
+        }
+    
 </style>
    
  
@@ -70,6 +111,7 @@ $row = mysqli_fetch_assoc($res);
   <script src="./vendor/alertify/alertify.min.js" type="text/javascript"></script>  
   <script src="./vendor/fontawesome/all.min.js" type="text/javascript"></script>
   <script src="./src/js/routing.js"></script>  
+ 
 
  
  
@@ -138,7 +180,29 @@ function timedRefresh(timeoutPeriod) {
                 }) 
             }
     </script> 
+<script>
+// Get the user's role (assuming you have retrieved it and stored it in a variable)
+// var userRole = "Admin"; // Replace with the actual user role retrieved from your authentication system
 
+// // Get the select element
+// var selectElement = document.getElementById("#admin_option");
+
+// // Loop through the options and hide them based on the user's role
+// for (var i = 0; i < selectElement.options.length; i++) {
+//   var option = selectElement.options[i];
+  
+//   if (option.value === userRole) {
+//     // Show the option for the user's role
+//     option.style.display = "block";
+//   } else {
+//     // Hide the option for other roles
+//     option.style.display = "none";
+//   }
+// } 
+
+
+
+  </script>
 
 </body>
 

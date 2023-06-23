@@ -1,21 +1,4 @@
-<?php 
-      include('./db/config.php');
 
-      $sql = "SELECT user_fullname,user_role FROM tbl_user_list  WHERE id = ?";
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param('i', $_SESSION['id']);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      if ($result->num_rows > 0) {
-          // output data of each row
-          while ($row = $result->fetch_assoc()) {
-              $user_fullname = $row["user_fullname"]; 
-              $user_role = $row["user_role"];  
-              $encodedUserRole = base64_encode($user_role);
-              echo '<script>var userRole = atob("' . $encodedUserRole . '");</script>';
-          }
-      }
-      $stmt->close()?> 
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -49,7 +32,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item"  data-page="case_caselist">CASE LIST</a></li>
               <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li>
-              <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li>
+              <!-- <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li> -->
             </ul>
           </li>
 
@@ -64,8 +47,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" data-page="manage_task" >MANAGE TASK</a></li>
-              <li><a class="dropdown-item" data-page="case_teammember">PROGRESS</a></li>
-              <li><a class="dropdown-item" id="btn_services" name="btn_services"data-page="manage_caseupdate">CASE UPDATE</a></li>
+              <!-- <li><a class="dropdown-item" data-page="case_teammember">PROGRESS</a></li> -->
+              <!-- <li><a class="dropdown-item" id="btn_services" name="btn_services"data-page="manage_caseupdate">CASE UPDATE</a></li> -->
             </ul>
           </li>
         </ul>
@@ -87,18 +70,3 @@
       </div>
     </div>
   </nav>
-  <script>
-    // Get the button element using its ID
-  var button = document.getElementById('btn_services');
-
-  // Check the user's role and hide or remove the button for admin users
-  if (userRole === 'Chief Lawyer') {
-      // Remove the button from the DOM
-      button.parentNode.removeChild(button);
-      button.style.display = 'none';
-  } else if (userRole === 'Associate Lawyer') {
-      // Hide the button
-      button.style.display = 'block';
-  }
-
-  </script>

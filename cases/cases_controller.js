@@ -179,8 +179,6 @@ $(document).on('click','#assign_lawyer_Btn',function(){
                   var client_name = result.data.firstname +" "+result.data.middlename + " "+ result.data.lastname;
                 //   $("#input_select_client_list").val(client_name);
                    
-
-                
                   $('#edit_client_case_number').html("Case Number: <span class='name'>" + result.data.case_number+"</span><br>"
                   +"Client Name: <span class='name'>" + client_name +"</span><br>"
                   );

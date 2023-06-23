@@ -1,6 +1,24 @@
 <?php  include './db/config.php';
         $user_log = $_SESSION['id'];
-  ?>
+  ?> 
+  <?php 
+      include('./db/config.php');
+
+      $sql = "SELECT user_fullname,user_role FROM tbl_user_list  WHERE id = ?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param('i', $_SESSION['id']);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      if ($result->num_rows > 0) {
+          // output data of each row
+          while ($row = $result->fetch_assoc()) {
+              $user_fullname = $row["user_fullname"]; 
+              $user_role = $row["user_role"];  
+              $encodedUserRole = base64_encode($user_role);
+              echo '<script>var userRole = atob("' . $encodedUserRole . '");</script>';
+          }
+      }
+      $stmt->close()?> 
 
 <script> 
 $(document).ready(function()
@@ -42,6 +60,14 @@ $('#userList').DataTable({});
                     <option value="Chief Lawyer">Chief Lawyer</option>
                     <option value="Associate Lawyer">Associate Lawyer</option>
                     <option value="Legal Secretary">Legal Secretary</option>
+                    <?php
+
+                      if($user_role == 'Admin'){
+                        ?><option value="Admin">Admin</option><?php
+                      }
+
+                      ?>
+
                </select> 
 
                <label for="add_entity_email" class="form-label">Email</label>
@@ -122,10 +148,15 @@ $('#userList').DataTable({});
                     <option value="Chief Lawyer">Chief Lawyer</option>
                     <option value="Associate Lawyer">Associate Lawyer</option>
                     <option value="Legal Secretary">Legal Secretary</option>
-               </select> 
-       
-       
+                   <?php
 
+                    if($user_role == 'Admin'){
+                      ?><option value="Admin">Admin</option><?php
+                    }
+
+                   ?>
+
+               </select> 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-warning">Save changes</button>

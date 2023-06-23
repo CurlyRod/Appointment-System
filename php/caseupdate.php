@@ -1,6 +1,14 @@
 <?php
 include '../db/config.php';
 
+use PHPMailer\PHPMailer\PHPMailer; 
+use PHPMailer\PHPMailer\Exception;
+
+require '../mailclass/src/Exception.php';
+require '../mailclass/src/PHPMailer.php';
+require '../mailclass/src/SMTP.php'; 
+
+
 if(isset($_POST['case_list_update']))
 {
         $client_id = $_POST['client_user_id_edit']; //client id from tbl_client_list
@@ -60,7 +68,7 @@ if($_POST['update_lawyer_cases']){
        
     $lawyer_id = $_POST['select_lawyer_id'];
     $remarks =$_POST['lawyer_remarks'];   
-   $case_id = $_SESSION['lawyer_id_session'];
+    $case_id = $_SESSION['lawyer_id_session'];
 
     $editAccount = $conn->prepare("UPDATE tbl_case_list AS cases SET cases.lawyer_user_id = ? ,cases.remarks =? WHERE cases.id =?"); 
     $editAccount->bind_param("isi",$lawyer_id,$remarks,$case_id);
@@ -70,7 +78,35 @@ if($_POST['update_lawyer_cases']){
                 'status' => 200,
                 'message' => 'Assign lawyer successfully.'
             ];
-        } else {
+
+           
+            // $mail = new PHPMailer(true);
+            // $mail->isSMTP();
+            // $mail->Host = 'smtp.gmail.com';
+            // $mail->SMTPAuth = true;
+            // $mail->Username = 'edocusaveit@gmail.com';
+            // $mail->Password = 'qkahgpdybirjotmt';
+            
+            // $mail->SMTPSecure = 'ssl';
+            // $mail->Port = 465;
+            
+            // $mail->setFrom('edocusaveit@gmail.com');
+    
+            //  $sampleEmail ="rufinorodmark7@gmail.com"; 
+            //  $sampleSubject = "New Case Assign";
+
+            //  $mail->addAddress($sampleEmail);
+            //  $mail->isHTML(true);
+            //  $mail->Subject = $sampleSubject;
+            
+            //  $message =  $case_id .'<br>'.$remarks;
+        
+            //  $mail->Body = $message ; 
+            //  $mail->send();
+
+        }
+
+        else {
             $res = [
                 'status' => 500,
                 'message' => 'Not Assign successfully.'
@@ -79,5 +115,8 @@ if($_POST['update_lawyer_cases']){
         echo json_encode($res);
         return false;
 }
- 
+  
+
+
+
 ?>

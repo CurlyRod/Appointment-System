@@ -4,23 +4,20 @@
 
     if(isset($_POST['save_task_information'])){
 
-    // $client_user_id = $_POST['select_client_list']; //client_user_id int
-    // $clientType = $_POST['clientType'];  
-    // $caseType =  $_POST['case_type_list']; 
-    // $caseSubType =  $_POST['case_type_sublist']; 
-
+    
     $case_number = $_POST['add_select_task']; 
     $start_date =  $_POST['start_date'];
     $end_date = $_POST['end_date']; 
     $remarks = $_POST['add_task_remarks']; 
     $priority = $_POST['priority_select']; 
-    $status = "On-going";
+    $status = "On-going"; 
+    $task_description =$_POST['add_task_description'];
     
 
 
-    $insertQuery = $conn->prepare("INSERT INTO tbl_task_list(case_number,start_date,end_date,remarks,status,priority)
-    VALUES (?,?,?,?,?,?)");
-    $insertQuery->bind_param("ssssss",$case_number,$start_date,$end_date,$remarks,$status,$priority); 
+    $insertQuery = $conn->prepare("INSERT INTO tbl_task_list(case_number,start_date,end_date,remarks,status,priority,task_description)
+    VALUES (?,?,?,?,?,?,?)");
+    $insertQuery->bind_param("sssssss",$case_number,$start_date,$end_date,$remarks,$status,$priority,$task_description); 
 
         if ($insertQuery->execute()) {
             $response = [
