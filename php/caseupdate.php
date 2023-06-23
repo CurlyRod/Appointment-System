@@ -68,10 +68,11 @@ if($_POST['update_lawyer_cases']){
        
     $lawyer_id = $_POST['select_lawyer_id'];
     $remarks =$_POST['lawyer_remarks'];   
-    $case_id = $_SESSION['lawyer_id_session'];
+    $case_id = $_SESSION['lawyer_id_session']; 
+    $caseStats = 'Ongoing';
 
-    $editAccount = $conn->prepare("UPDATE tbl_case_list AS cases SET cases.lawyer_user_id = ? ,cases.remarks =? WHERE cases.id =?"); 
-    $editAccount->bind_param("isi",$lawyer_id,$remarks,$case_id);
+    $editAccount = $conn->prepare("UPDATE tbl_case_list AS cases SET cases.lawyer_user_id = ? ,cases.remarks =? ,cases.case_status =? WHERE cases.id =?"); 
+    $editAccount->bind_param("issi",$lawyer_id,$remarks,$caseStats,$case_id);
     $result = $editAccount->execute();
         if ($result) {
             $res = [

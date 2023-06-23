@@ -67,3 +67,37 @@ $(document).on('click','#view_task_info',function(e){
     }); 
 
 
+    $('#addTaskHome').on('click', function(e) {
+        e.preventDefault();
+    
+        var formData = new FormData($('#add_casetask_Form')[0]);
+        formData.append("save_task_information", true);
+        
+    
+        $.ajax({
+            type: "POST",
+            url: "./php/managetask._ajax.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                var res = jQuery.parseJSON(response);
+    
+                if (res.status == 500) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.set('notifier', 'delay', 1); 
+                    alertify.success(res.message);
+                } else if (res.status == 200) {
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.set('notifier', 'delay', 1);
+                    alertify.success(res.message);
+    
+                   
+                    $('#add_casetask_Form')[0].reset();
+    
+                    loadContent('manage_task');
+                } 
+            }
+        });
+    });  
+     

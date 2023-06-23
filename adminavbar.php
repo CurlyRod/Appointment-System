@@ -36,7 +36,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <!-- <li><a class="dropdown-item"  data-page="case_caselist">CASE LIST</a></li>
               <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li> -->
-              <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li>
+              <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="admin_casetype">SERVICES</a></li>
             </ul>
           </li>
 

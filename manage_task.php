@@ -17,7 +17,7 @@ $('#taskList').DataTable({});
 $(document).ready(function() {
      $('.select_client_task').select2({});
       
-        $('#toggleButton').on('click', function(e) {
+ $('#toggleButton').on('click', function(e) {
   e.preventDefault();
   
   var cardTask = $('#cardTask');

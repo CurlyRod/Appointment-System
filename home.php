@@ -1,4 +1,15 @@
+<style>
+.cardTimeline {
+  height: 200px;
+  transition: height 0.3s ease;
+  overflow: hidden;
+}
 
+.card.expanded {
+  height: auto;
+}
+
+</style>
 <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
         <div class="modal-dialog ">
             <div class="modal-content rounded-0">
@@ -8,17 +19,6 @@
                 </div>
                 <div class="modal-body rounded-0">
                     <div class="container-fluid">
-                        <!-- <dl>
-                            <dt class="text-muted">Title</dt>
-                            <dd id="title" class="fw-bold fs-4"></dd>
-                            <dt class="text-muted">Description</dt>
-                            <dd id="description" class=""></dd>
-                            <dt class="text-muted">Start</dt>
-                            <dd id="start" class=""></dd>
-                            <dt class="text-muted">End</dt>
-                            <dd id="end" class=""></dd>
-                        </dl> --> 
-
                         <div class="row">
                             <div class="col-12 form-control"><label for="title"  style="font-weight:500;"class="text-dark">DESCRIPTION:</label> <label id="title" class=""></label></div>    
                             <div class="col-12 form-control"><label for="title"  style="font-weight:500;"class="text-dark">REMARKS:</label> <label id="remarks" class=""></label></div>    
@@ -39,14 +39,23 @@
             </div>
         </div>
     </div>
-<div class="row ">
-    <div class="col-4">
+<div class="row " >
+    <div class="col-4"id="cardTimeline" >
     <div class="card">
-            <div class="card-header fw-bold"style="border-bottom:5px solid #ADA06D;">TIMELINE</div>
+            <div class="card-header fw-bold mt-2"style="border-bottom:5px solid #ADA06D;">TIMELINE</div>
             <div class="card-body">
-            <div class="table-responsive " style="height:600px;">
-			<table class="table" style="font-size:10px;">
-                     
+            <div class="table-responsive " style="height:500px;">
+		<table class="table" style="font-size:10px;">
+         <thead >
+            <tr > 
+          
+                <th class="text-center"style="width:80px;">DATE</th>
+                <th class="text-center">CASE #</th>
+                <th class="text-center">DESCRIPTION</th>
+                <th class="text-center">REMARKS</th>
+                <th class="text-center">PRIORITY</th>
+            </tr>
+            </thead>
  					<tbody class="table-warning">
                     
 					 <?php
@@ -57,27 +66,33 @@
                                 INNER JOIN tbl_user_list AS user ON cases.lawyer_user_id = user.id
                                 INNER JOIN tbl_task_list as task ON cases.case_number = task.case_number
                                 INNER JOIN tbl_client_list AS client WHERE  cases.client_user_id = client.id";
+                             
                                 $query = $conn->query($client_list);
                                 $i = 1; 
                                 while($row= $query->fetch_assoc()):           
 								
 									$date = new DateTime($row['end_date']);
 									$formattedDate = $date->format('F j, Y');
-					?>      
-        			   <tr>    
-                            <td id="case_modal"class="text-start">
-							<div class="row">
-								<div class="col text-center"><b><?php echo $formattedDate;?></b></div>
-								<div class="col text-center"><b><?php echo $row['case_number'];?></b></div>
-                                <!-- <div class="col text-center"><?php echo $row['']?></div> -->
-								<!-- <div class="col"><?php echo $row['firstname'].' '.$row['middlename'].' '.$row['lastname'];?></div> -->
-								<!-- <div class="col"><?php echo $row['case_type']?></div> -->
-
-                                <div class="col text-center"><?php echo $row['task_description']?></div>
-                                <div class="col text-center"><?php echo $row['remarks']?></div>
-                                <div class="col text-center"><?php echo $row['priority']?></div>
-							</div>
-                       	   </td>
+				            	?>      
+        			        <tr>    
+                                    <!-- <td id="case_modal"class="text-start"> -->
+							
+								   <td class="text-center"><b><?php echo $formattedDate;?></b></td>
+                                   <td class="text-center"><b><?php echo $row['case_number'];?>  </td>     
+                                   <td class="text-center"><?php echo $row['task_description']?></td>
+                                   <td class="text-center"><?php echo $row['remarks']?></td>
+                                   <td class="text-center"><?php
+                                   if($row['priority'] == 'High')
+                                   {
+                                    ?><button class="btn btn-sm btn-danger" style="font-size:10px;"><?php echo $row['priority']?></button><?php
+                                   }else if($row['priority'] == 'Medium')
+                                   {
+                                    ?><button class="btn btn-sm btn-info" style="font-size:10px;"><?php echo $row['priority']?></button><?php
+                                   }else if($row['priority'] == 'Low')
+                                   {
+                                    ?><button class="btn btn-sm btn-success" style="font-size:10px;"><?php echo $row['priority']?></button><?php
+                                   }
+                                   ?></td>
                             </tr>
                             <?php endwhile;?>
 					</tbody>
@@ -91,7 +106,7 @@
     <div class="card">
             <div class="card-header fw-bold"style="border-bottom:5px solid #ADA06D;"><div class="row">
                 <div class="col-2">CALENDAR</div>
-                <div class="col"><button class="btn btn-sm btn-warning">Add Task</button:btn></div>
+                <div class="col"><button class="btn btn-sm btn-warning" id="hideTimelines">Add Task</button:btn></div>
             </div></div>
             <div class="card-body">
               <div id="calendar"></div>            
@@ -120,4 +135,5 @@
      <script>
         var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
     </script>
-<script src="./src/js/script.js"></script>
+<script src="./src/js/script.js"></script> 
+

@@ -127,7 +127,16 @@ $row = mysqli_fetch_assoc($res);
     });
 
     // Set the default page and add 'selected' class
-    var defaultPage = 'home'; // Change 'home' to the desired default page
+   // Change 'home' to the desired default page 
+
+   <?php
+   if($user_role =='Chief Lawyer'){
+   ?> var defaultPage = 'home'; <?php
+   }else if($user_role == 'Admin')
+   {
+    ?> var defaultPage = 'admin_casetype';<?php
+   }
+   ?>
     $('nav a[data-page="' + defaultPage + '"]').addClass('selected');
     loadContent(defaultPage);
 

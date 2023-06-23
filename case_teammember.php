@@ -178,7 +178,8 @@
                             <td id="case_modal"class="text-center"><button class="btn btn-sm btn-primary" name="assign_lawyer_Btn" id="assign_lawyer_Btn"  value="<?php echo $row['id']?>" >
                          <?php  $_SESSION['lawyer_id_session'] = $row['id']?>
                             <?php echo $row['case_number']?></button>
-                        </td>
+                        </td> 
+                        
                             </tr>
                             <?php endwhile;?>
 					</tbody>
@@ -238,7 +239,8 @@
                                 <tr>
                                     <td class="text-center"><b><?php echo $i++?></b></td>  
                                     <td class="text-center"><?php echo $row['user_fullname']?></td> 
-                                    <td class="text-center"><b><?php echo $row['user_count']?></b></td> 
+                                    <td class="text-center"><b><?php echo $row['user_count']?></b></td>  
+                                    <td class="text-center"><button id="viewAllCase" class="btn btn-sm btn-primary" style="font-size:10px;">View Cases</button></td>
                                 </tr>
                             <?php endwhile;?>
                             </tbody>
@@ -253,7 +255,7 @@
 <script>
      $(document).ready(function() {
     $('#cases_btn').addClass('selected');
-});
+}); 
 
 $(document).off('submit', '#assign_lawyer_Forms').on('submit', '#assign_lawyer_Forms', function(e) {
     e.preventDefault();
@@ -294,5 +296,16 @@ $(document).off('submit', '#assign_lawyer_Forms').on('submit', '#assign_lawyer_F
   //  xhr.abort(); 
   }); 
 
-</script> 
+</script>  
+
+<script>
+$(document).on('click','#viewAAllcase',function(e){
+e.preventDefault();
+var viewCaseId  = $(this).val();
+alert(viewCaseId);
+});
+
+
+
+</script>
 
