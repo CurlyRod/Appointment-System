@@ -98,11 +98,11 @@ $('#entityList').DataTable({});
       </div>
       <div class="modal-body">
             
-      <form action="" id="save_client_Form">
+      <form action="" id="save_clientLegal_Form">
         <div class="row">
             <div class="col">
                 <label for="company_name" class="form-label">Company Name</label>    
-                <input type="text" id="company_name" name="company_name" class="form-control">
+                <input type="text" id="company_names" name="company_names" class="form-control">
             </div>
             <div class="col">
             <label for="company_address" class="form-label">Company address</label>    
@@ -147,7 +147,7 @@ $('#entityList').DataTable({});
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" id="save_legal_client"class="btn btn-warning">Save changes</button>
+        <button type="button" id="save_legalBtn_client"class="btn btn-warning">Save changes</button>
       </div>
       </form>
 
@@ -274,9 +274,77 @@ $('#entityList').DataTable({});
     </div>
 </div> 
 <script src="./client/client_legal_controller.js"></script>
-<script>
-     $(document).ready(function() {
-    $('#client_btn').addClass('selected');
+<script> 
+
+
+  // ADD LEGAL ENTITY 
+  $(document).on('click','#save_legalBtn_client',function(e){
+    e.preventDefault();
+    
+    //INSTANCIATE THR FORM FOR DATA COLLECTION 
+    //CALL THE ID OF FORM  ZERO PARAMETER TO VOID DUPLICATION SUBMIT
+
+    var formData =  new FormData($('#save_clientLegal_Form')[0]);
+    formData.append('save_legal_information',true);
+
+    //CALL THE AJAX IMPLEMENTATIO FOR ASYNCHRONOUS 
+
+    $.ajax({ 
+        type:"POST",
+        url:"./php/client_ajax.php",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success:function(response){
+            var result = jQuery.parseJSON(response);
+            if(result.status == 404)
+            {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(result.message);
+            }else if(result.status == 500)
+            {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(result.message);
+             }
+             else if(result.status == 423) {
+                
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(result.message)
+            }
+            else if(result.status == 200)
+            {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.set('notifier', 'delay', 1); 
+                alertify.success(result.message);
+
+                $('#addEntityUserModal').modal('hide');
+                $('#save_clientLegal_Form')[0].reset();
+                loadContent('legal_clientlist'); 
+            }
+            $(document).off('submit', '#save_clientLegal_Form');
+           
+
+        }
+    }); 
+}); 
+
+
+
+
+
+
+
+
+
+
+
+
+ $(document).ready(function() {
+  $('#client_btn').addClass('selected');
 }); 
 
 

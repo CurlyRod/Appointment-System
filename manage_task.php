@@ -181,6 +181,8 @@ $(document).ready(function() {
                                         <div class="col-md-4 "><button class="btn btn-sm btn-primary" id="view_task_info"  value="<?php echo $row['id']?>"><img src="./src/img/view (1).png"alt=""></button></div>   
                                         <div class="col-md-4"><button class="btn btn-sm btn-danger"id="delete_tasks_info"  value="<?php echo $row['id']?>"><img src="./src/img/trash-can.png" alt=""></button></div>
                                         <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_clien"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div> 
+                                        <div class="col-md-4"><button class="btn btn-sm btn-success"  value="<?php echo $row['id']?>"><img src="./src/img/mail.png" alt=""></button></div> 
+                                     
                                         <!-- <div class="col-md-3"><button class="btn btn-sm btn-secondary"id="addtask_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Add Task</button></div>  -->
                                         <!-- <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_client_info"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div>  -->
                                       

@@ -342,7 +342,7 @@ if(isset($_GET['view_legal_entity']))  {
  if(isset($_POST['save_legal_information']))
  {
     
-     $companyName =$_POST['company_name'];
+     $companyName =$_POST['company_names'];
      $companyAddress =$_POST['company_address'];
      $lastName = $_POST['legal_lastname']; 
      $firstName = $_POST['legal_firstname']; 
