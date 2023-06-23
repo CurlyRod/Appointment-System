@@ -66,8 +66,9 @@ $(document).on('click','#legal_delete_user',function(e){
    
                     }else if(result.status ==200)
                     {  
-                        alertify.set('notifier', 'delay', 1);
+                    
                         alertify.set('notifier','positions','top-right'); 
+                        alertify.set('notifier', 'delay', 1);
                         alertify.success(result.message); 
                         loadContent('legal_clientlist');
                     }
@@ -77,69 +78,6 @@ $(document).on('click','#legal_delete_user',function(e){
         }
    });
 }); 
-// var isSubmitting = false;
-
-// // Inside the click event handler
-// if (!isSubmitting) {
-//     isSubmitting = true; // Set the flag to true
-//     // AJAX request code here 
-
-
-//     // ADD LEGAL ENTITY 
-// $(document).on('click','#save_legal_client',function(e){
-//     e.preventDefault();
-    
-//     //INSTANCIATE THR FORM FOR DATA COLLECTION 
-//     //CALL THE ID OF FORM  ZERO PARAMETER TO VOID DUPLICATION SUBMIT
-
-//     var formData =  new FormData($('#save_client_Form')[0]);
-//     formData.append('save_legal_information',true);
-
-//     //CALL THE AJAX IMPLEMENTATIO FOR ASYNCHRONOUS 
-
-//     $.ajax({ 
-//         type:"POST",
-//         url:"./php/client_ajax.php",
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-
-//         success:function(response){
-//             var result = jQuery.parseJSON(response);
-//             if(result.status == 404)
-//             {
-//                 alertify.set('notifier', 'position', 'top-right');
-//                 alertify.set('notifier', 'delay', 1); 
-//                 alertify.success(result.message);
-//             }else if(result.status == 500)
-//             {
-//                 alertify.set('notifier', 'position', 'top-right');
-//                 alertify.set('notifier', 'delay', 1); 
-//                 alertify.success(result.message);
-//              }
-//              else if(result.status == 423) {
-                
-//                 alertify.set('notifier', 'position', 'top-right');
-//                 alertify.set('notifier', 'delay', 1); 
-//                 alertify.success(result.message)
-//             }
-//             else if(result.status == 200)
-//             {
-//                 alertify.set('notifier', 'position', 'top-right');
-//                 alertify.set('notifier', 'delay', 1); 
-//                 alertify.success(result.message);
-
-//                 $('#addEntityUserModal').modal('hide');
-//                 $('#save_client_Form')[0].reset();
-//                 loadContent('legal_clientlist'); 
-//             }
-//             $(document).off('submit', '#save_client_Form');
-           
-
-//         }
-//     }); 
-// }); 
-// }
 
 
 

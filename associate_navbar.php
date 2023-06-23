@@ -30,15 +30,12 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item"  data-page="case_caselist">CASE LIST</a></li>
-              <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li>
+              <!-- <li><a class="dropdown-item" data-page="case_teammember">TEAM MEMBER</a></li> -->
               <!-- <li><a class="dropdown-item"id="btn_services" name="btn_services"data-page="legal_clientlist">SERVICES</a></li> -->
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link"  data-page="users" style="color:#ADA06D;" id="user_btn">USERS</a>
-          </li>
-
+       
           <li class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle" href="#" id="manage_task" role="button" data-bs-toggle="dropdown"
               aria-expanded="false" style="color:#ADA06D;" >

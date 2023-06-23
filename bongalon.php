@@ -35,7 +35,7 @@ $row = mysqli_fetch_assoc($res);
   <script src="./vendor/js/jquery-3.6.1.js" type="text/javascript"> </script>   
   <link rel="stylesheet" href="./select2/select2.min.css">
   <script src="./select2/select2.min.js"></script> 
-  <script src="./vendor/fullcalendar/lib/main.min.js"></script>
+
  
   <title>BONGALON LAW FIRM</title>
 </head>
@@ -68,9 +68,11 @@ $row = mysqli_fetch_assoc($res);
     }else if($user_role == 'Admin'){
       include 'adminavbar.php'; 
     }
+    else if($user_role == 'Associate Lawyer')
+    {
+      include 'associate_navbar.php'; 
+    }
 
-  
-  
   ?>
   
   <style>
@@ -111,6 +113,7 @@ $row = mysqli_fetch_assoc($res);
   <script src="./vendor/alertify/alertify.min.js" type="text/javascript"></script>  
   <script src="./vendor/fontawesome/all.min.js" type="text/javascript"></script>
   <script src="./src/js/routing.js"></script>  
+  <script src="./vendor/fullcalendar/lib/main.min.js"></script>
  
 
  

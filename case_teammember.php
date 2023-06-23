@@ -1,5 +1,39 @@
 <!-- MODAL START HERE  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Case Assigned</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background:#ECE1BE;">
+        
+        <div class="col">CASE NUMBER:CN-64956981 </div>
+        <div class="col">CASE TYPE:Corporate </div>
+        <div class="col">STATUS:Ongoing </div>
 
+        <div style="border-bottom:2px solid black;"></div>
+
+
+        <div class="col">CASE NUMBER:CN-64956983 </div>
+        <div class="col">CASE TYPE:Special Project</div>
+        <div class="col">STATUS:Ongoing </div>
+
+         <div style="border-bottom:2px solid black;"></div>
+
+
+        <div class="col">CASE NUMBER:CN-64956985 </div>
+        <div class="col">CASE TYPE:Litigation </div>
+        <div class="col">STATUS:Ongoing </div>
+     
+  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ASSIGN LAWYER MODAL HERE --> 
 <div class="modal fade" id="assign_lawyer_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -240,7 +274,7 @@
                                     <td class="text-center"><b><?php echo $i++?></b></td>  
                                     <td class="text-center"><?php echo $row['user_fullname']?></td> 
                                     <td class="text-center"><b><?php echo $row['user_count']?></b></td>  
-                                    <td class="text-center"><button id="viewAllCase" class="btn btn-sm btn-primary" style="font-size:10px;">View Cases</button></td>
+                                    <td class="text-center"><button id="viewAllCase" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" value="<?php echo $row['id']?>" style="font-size:10px;">View Cases</button></td>
                                 </tr>
                             <?php endwhile;?>
                             </tbody>
@@ -286,6 +320,7 @@ $(document).off('submit', '#assign_lawyer_Forms').on('submit', '#assign_lawyer_F
         
            $('#assign_lawyer_Forms')[0].reset();
            $('#assign_lawyer_Modal').modal('hide'); 
+           Swal.fire('Successfully Email Send!', '', 'success'); 
             loadContent('case_teammember'); 
          } 
          // abortController.abort();
@@ -299,13 +334,10 @@ $(document).off('submit', '#assign_lawyer_Forms').on('submit', '#assign_lawyer_F
 </script>  
 
 <script>
-$(document).on('click','#viewAAllcase',function(e){
-e.preventDefault();
-var viewCaseId  = $(this).val();
-alert(viewCaseId);
-});
-
-
-
+  $(document).on('click','#viewAllcase',function(e){
+  e.preventDefault();
+  var viewCaseId  = $(this).val();
+  console.log(viewCaseId);
+  });
 </script>
 

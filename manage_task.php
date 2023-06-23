@@ -177,11 +177,11 @@ $(document).ready(function() {
                                     ?></td>
                                     <td class="text-center"><?php echo $row['status'];?></td>
                                     <td>      
-                                    <div class="container d-flex justify-content-end ">                                             
-                                        <div class="col-md-4 "><button class="btn btn-sm btn-primary" id="view_task_info"  value="<?php echo $row['id']?>"><img src="./src/img/view (1).png"alt=""></button></div>   
-                                        <div class="col-md-4"><button class="btn btn-sm btn-danger"id="delete_tasks_info"  value="<?php echo $row['id']?>"><img src="./src/img/trash-can.png" alt=""></button></div>
-                                        <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_clien"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div> 
-                                        <div class="col-md-4"><button class="btn btn-sm btn-success"  value="<?php echo $row['id']?>"><img src="./src/img/mail.png" alt=""></button></div> 
+                                    <div class="container d-flex justify-content-start ">                                             
+                                        <div class="col-md-3 "><button class="btn btn-sm btn-primary" id="view_task_info"  value="<?php echo $row['id']?>"><img src="./src/img/view (1).png"alt=""></button></div>   
+                                        <div class="col-md-3"><button class="btn btn-sm btn-danger"id="delete_tasks_info"  value="<?php echo $row['id']?>"><img src="./src/img/trash-can.png" alt=""></button></div>
+                                        <div class="col-md-3"><button class="btn btn-sm btn-success"id="edit_clien"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div> 
+                                        <div class="col-md-3"><button class="btn btn-sm btn-info" id="send_mail_task" value="<?php echo $row['id']?>"><img src="./src/img/email (1).png" alt=""></button></div> 
                                      
                                         <!-- <div class="col-md-3"><button class="btn btn-sm btn-secondary"id="addtask_client_info"  value="<?php echo $row['id']?>" style="font-size:10px;">Add Task</button></div>  -->
                                         <!-- <div class="col-md-4"><button class="btn btn-sm btn-success"id="edit_client_info"  value="<?php echo $row['id']?>"><img src="./src/img/pen.png" alt=""></button></div>  -->
@@ -201,7 +201,7 @@ $(document).ready(function() {
     </div>
   
     <div class="col" id="cardTask" style="background:#F5F5F5;">
-        <div class="card " style="height:470px;";>
+        <div class="card " ;>
           <div class="card-header fw-bold mt-1" style="border-bottom:5px solid #C6A984;">Task Information</div>
              <div class="card-body">
 
@@ -221,7 +221,7 @@ $(document).ready(function() {
 
                     foreach($query_runs as $row){ 
                     ?>
-                    <option value="<?= $row['case_number']; ?>"> <?= $row['case_number'];?> ~ [<?= $row['user_fullname'];?>] </option>
+                    <option value="<?= $row['case_number']; ?>"> <?= $row['case_number'];?> ~ [<?= $row['firstname'].'  '.$row['middlename'].'  '.$row['lastname']?> </option>
                     <?php 
                     }
                 } 
@@ -322,6 +322,17 @@ $(document).on('click','#delete_tasks_info',function(e){
         }
    });
   
+});  
+
+
+$(document).on('click','#send_mail_task',function(e){
+e.preventDefault(); 
+
+var id = $(this).val();  
+console.log(id); 
+
+Swal.fire('Successfully Email Send!', '', 'success');
+
 });
 </script>
 

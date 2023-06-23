@@ -7,9 +7,20 @@
 
 .card.expanded {
   height: auto;
+
+
+}
+.event-one-day {
+  color: red;
+}
+.fc .fc-bg-event .fc-event-title{
+
 }
 
-</style>
+
+</style> 
+
+
 <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
         <div class="modal-dialog ">
             <div class="modal-content rounded-0">
@@ -40,16 +51,16 @@
         </div>
     </div>
 <div class="row " >
-    <div class="col-4"id="cardTimeline" >
+    <div class="col-5"id="cardTimeline" >
     <div class="card">
             <div class="card-header fw-bold mt-2"style="border-bottom:5px solid #ADA06D;">TIMELINE</div>
             <div class="card-body">
             <div class="table-responsive " style="height:500px;">
-		<table class="table" style="font-size:10px;">
+		<table class="table" style="font-size:12px;">
          <thead >
             <tr > 
           
-                <th class="text-center"style="width:80px;">DATE</th>
+                <th class="text-center"style="width:100px;">DATE</th>
                 <th class="text-center">CASE #</th>
                 <th class="text-center">DESCRIPTION</th>
                 <th class="text-center">REMARKS</th>
@@ -65,20 +76,41 @@
                                 FROM tbl_case_list as cases
                                 INNER JOIN tbl_user_list AS user ON cases.lawyer_user_id = user.id
                                 INNER JOIN tbl_task_list as task ON cases.case_number = task.case_number
-                                INNER JOIN tbl_client_list AS client WHERE  cases.client_user_id = client.id";
+                                INNER JOIN tbl_client_list AS client WHERE  cases.client_user_id = client.id and task.end_date >= CURDATE() ORDER BY task.end_date ASC";
                              
                                 $query = $conn->query($client_list);
                                 $i = 1; 
                                 while($row= $query->fetch_assoc()):           
 								
-									$date = new DateTime($row['end_date']);
-									$formattedDate = $date->format('F j, Y');
-				            	?>      
-        			        <tr>    
-                                    <!-- <td id="case_modal"class="text-start"> -->
-							
-								   <td class="text-center"><b><?php echo $formattedDate;?></b></td>
-                                   <td class="text-center"><b><?php echo $row['case_number'];?>  </td>     
+                                    $edate = new DateTime($row['end_date']);
+                                    $formattedDate = $edate->format('Y-m-d');
+                                    ?>      
+                                    <tr>              
+                                        <?php
+                                        $currentDate = new DateTime(); // Current date and time
+                                        
+                                        // Set time to the end of the current day
+                                        $currentDate->setTime(23, 59, 59);
+                                        
+                                        $interval = $currentDate->diff($edate);
+                                        $days = $interval->days + 1;  // Add 1 to include the current day
+                                        
+                                        if ($days == 1) {
+                                            ?> 
+                                            <td class="text-center" style="color:#FFCA2C;"><button class="btn btn-sm btn-danger" style="font-size:10px;"><b><?php echo $formattedDate;?></b></button>
+                                            <td class="text-center text-danger" style="background:white;"><b><?php echo $row['case_number'];?></td>  
+                                            </td><?php  
+                                        } else if ($days <=3) {
+                                            ?><td class="text-center" style="color:#FFCA2C;"><button class="btn btn-sm btn-warning" style="font-size:10px;"><b><?php echo $formattedDate;?></b></button></td>
+                                             <td class="text-center text-warning" style="background:white;"><b><?php echo $row['case_number'];?></td>  
+                                            <?php
+                                      
+                                        } else {
+                                            ?><td class="text-center"style="background:white;"><b><?php echo $formattedDate;?></b></td><?php
+                                        }
+                                        ?>
+                                 
+                                     
                                    <td class="text-center"><?php echo $row['task_description']?></td>
                                    <td class="text-center"><?php echo $row['remarks']?></td>
                                    <td class="text-center"><?php
@@ -133,7 +165,11 @@
     }
     ?>
      <script>
-        var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
+        var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')  
+
+        $('.fc').css('background-color','red');
     </script>
-<script src="./src/js/script.js"></script> 
+<script src="./src/js/script.js"></script>  
+
+
 

@@ -15,7 +15,7 @@ if(isset($_POST['reassign_lawyer_update']))
         if ($result) {
             $res = [
                 'status' => 200,
-                'message' => 'Update successfully.'
+                'message' => 'New Case Assign.'
             ];
         } else {
             $res = [
